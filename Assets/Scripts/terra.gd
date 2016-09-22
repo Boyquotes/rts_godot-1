@@ -1,6 +1,6 @@
 extends TileMap
-export var size_x = 10
-export var size_y = 10
+export var size_x = 40
+export var size_y = 40
 
 func _ready():
 	var map = Map.new(size_x, size_y)
@@ -33,32 +33,37 @@ class Map:
 			for y in range(0, size_y):
 				tmp.append(ID_GRASS)
 			map.append(tmp)
-		gen_forest(size_x, size_y, 3, 5)
+		gen_forest(size_x, size_y, 8, 36)
 	
-	func gen(size_x, size_y, count_struct_max, count_obj_max, tile):
+	func gen_rnd_struct(size_x, size_y, count_struct_max, count_obj_max, tiles, type_rnd='full'):
 		randomize()
 		for count_struct in range(0, count_struct_max):
 			var rnd_coord = RndCoord.new(size_x, size_y)
 			var x = rnd_coord.x
 			var y = rnd_coord.y
 			var dir = 0
+			var tile
 			var count_obj = 0
+			if type_rnd == 'struct':
+				tile = tiles[randi() % tiles.size()]
 			while count_obj != count_obj_max:
 				dir = randi() % 4
 				if dir == 0:
-					x+=1
+					x += 1
 				if dir == 1:
-					x+=-1
+					x += -1
 				if dir == 2:
-					y+=1
+					y += 1
 				if dir == 3:
-					y+=-1
-					
-				map[x][y] = tile
-				count_obj += 1
+					y += -1
+				if type_rnd == 'full':
+					tile = tiles[randi() % tiles.size()]
+				if size_x > abs(x) and size_y > abs(y):
+					map[x][y] = tile
+					count_obj += 1
 	
 	func gen_forest(size_x, size_y, count_forest, count_tree):
-		gen(size_x, size_y, count_forest, count_tree, ID_FOREST)
+		gen_rnd_struct(size_x, size_y, count_forest, count_tree, [ID_FOREST])
 		
 	func render(size_x, size_y, tilemap):
 		for x in range(0, size_x):

@@ -23,7 +23,7 @@ collision/mask = 1
 occluder/light_mask = 1
 tile_data = IntArray(  )
 script/script = ExtResource( 2 )
-size_x = 10
-size_y = 10
+size_x = 40
+size_y = 40
 
 
