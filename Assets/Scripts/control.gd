@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 # George Linkovsky - GovnoCode (2016)
 onready var cam = get_node("../Camera2D")
 export var select_color = Color(0,1,0,0.1)
@@ -13,7 +13,7 @@ func _process(delta):
 		last_point = cam.get_global_mouse_pos()
 		update()
 	elif Input.is_action_just_released("LKM"):
-		get_tree().call_group(2,"solider", "selecting", start_point, last_point )
+		get_tree().call_group(2, "solider", "selecting", start_point, last_point )
 		start_point = Vector2()
 		last_point = Vector2()
 		update()
