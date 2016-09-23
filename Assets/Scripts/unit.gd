@@ -1,13 +1,12 @@
 extends Sprite    
 # George Linkovsky - GovnoCode (2016)
+export var diffuse_color_unit = Color(1,0.1,0.1)
+export var select_color_unit = Color(0.1,1,0.1)
+var current_color_unit = diffuse_color_unit
 
 func _ready():
 	add_to_group("solider")
-	set_modulate(currentColorUnit)
-
-var diffuseColorUnit = Color (1,0.1,0.1)
-var selectColorUnit = Color (0.1,1,0.1)
-var currentColorUnit = diffuseColorUnit
+	set_modulate(current_color_unit)
 	
 func selecting(s, l):
 	var sx = false
@@ -38,6 +37,6 @@ func selecting(s, l):
 	else:
 		if get_global_pos().y < l.y and (get_global_pos().y > s.y): y = true
 	
-	if x and y: currentColorUnit = selectColorUnit
-	else: currentColorUnit = diffuseColorUnit
-	set_modulate(currentColorUnit)
+	if x and y: current_color_unit = select_color_unit
+	else: current_color_unit = diffuse_color_unit
+	set_modulate(current_color_unit)
