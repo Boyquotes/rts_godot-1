@@ -4,30 +4,20 @@ export var diffuse_color_unit = Color(1,0.1,0.1)
 export var select_color_unit = Color(0.1,1,0.1)
 var current_color_unit = diffuse_color_unit
 
-
 class Unit:
-	
-#	var type = "solider"
-#	var health = 12
-#	var morale = 8
-#	var strange = 14
-#	var strange_type = 1
-#	var national = "poland"
-#	var speed = 4
-#	var demoral = 1
 	var ID
-	var type
-	var health 
-	var morale
-	var strange
-	var strange_speed
-	var strange_type
-	var national
-	var speed
-	var demoral
+	var type          #	var type = "solider"
+	var health        #	var health = 12
+	var morale        #	var morale = 8
+	var strange       #	var strange = 14
+	var strange_speed 
+	var strange_type  #	var strange_type = 1
+	var national      #	var national = "poland"
+	var speed         #	var speed = 4
+	var demoral       #var demoral = 1
 	var cord
 	func _init(player, type, cord):
-		var unit_conf = load ("res://Assets/configs/unit_list.gd").new()
+		var unit_conf = load ("res://Assets/Configs/unit_list.gd").new()
 		self.ID = player["ID"]
 		self.type = type
 		self.national = player["national"]
