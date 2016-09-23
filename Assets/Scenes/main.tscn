@@ -1,11 +1,23 @@
 [gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://Assets/scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Scripts/control.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Scenes/unit.tscn" type="PackedScene" id=2]
 
 [node name="main" type="Node2D"]
 
+[node name="Control" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -10.0
+margin/top = 0.0
+margin/right = 30.0
+margin/bottom = 40.0
 script/script = ExtResource( 1 )
+select_color = Color( 0, 1, 0, 0.1 )
+select_color_border = Color( 0, 1, 0, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

@@ -36,7 +36,7 @@ class Map:
 		gen_forest(size_x, size_y, 8, 36)
 	
 	func gen_rnd_struct(size_x, size_y, count_struct_max, count_obj_max, tiles, type_rnd='full'):
-		randomize()
+		randomize() #need add fat len
 		for count_struct in range(0, count_struct_max):
 			var rnd_coord = RndCoord.new(size_x, size_y)
 			var x = rnd_coord.x

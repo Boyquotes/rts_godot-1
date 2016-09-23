@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=3 format=1]
 
-[ext_resource path="res://Assets/Textures/grass.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Textures/forest.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Textures/Map/grass.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Textures/Map/forest.png" type="Texture" id=2]
 
 [resource]
 
