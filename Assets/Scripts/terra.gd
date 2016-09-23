@@ -1,9 +1,13 @@
 extends TileMap
+#  Copyright 2016 Derbin Dmitry
+
 export var size_x = 40
 export var size_y = 40
+export var count_forest = 8
+export var count_tree = 36
 
 func _ready():
-	var map = Map.new(size_x, size_y)
+	var map = Map.new(size_x, size_y, count_forest, count_tree)
 	var tilemap = get_node('.')
 	map.render(size_x, size_y, tilemap)
 
@@ -27,13 +31,13 @@ class Map:
 	const ID_GRASS = 0
 	const ID_FOREST = 1
 	
-	func _init(size_x, size_y):
+	func _init(size_x, size_y, count_forest, count_tree):
 		for x in range(0, size_x):
 			var tmp = [] 
 			for y in range(0, size_y):
 				tmp.append(ID_GRASS)
 			map.append(tmp)
-		gen_forest(size_x, size_y, 8, 36)
+		gen_forest(size_x, size_y, count_forest, count_tree)
 	
 	func gen_rnd_struct(size_x, size_y, count_struct_max, count_obj_max, tiles, type_rnd='full'):
 		randomize() #need add fat len

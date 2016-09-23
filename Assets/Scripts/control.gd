@@ -18,12 +18,15 @@ func _process(delta):
 		last_point = Vector2()
 		update()
 
-func _draw():
+func draw_select_area():
 	draw_rect(Rect2(start_point, last_point-start_point), select_color)
 	draw_line(start_point, Vector2(start_point.x, last_point.y), select_color_border)
 	draw_line(start_point, Vector2(last_point.x, start_point.y), select_color_border)
 	draw_line(Vector2(start_point.x, last_point.y), last_point, select_color_border)
 	draw_line(Vector2(last_point.x, start_point.y), last_point, select_color_border)
+
+func _draw():
+	draw_select_area()
 
 func _ready():
 	set_process(true)

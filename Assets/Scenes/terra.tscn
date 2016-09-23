@@ -25,5 +25,7 @@ tile_data = IntArray(  )
 script/script = ExtResource( 2 )
 size_x = 40
 size_y = 40
+count_forest = 8
+count_tree = 36
 
 
