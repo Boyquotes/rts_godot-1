@@ -7,7 +7,8 @@ onready var u_inst = get_node("../terra/units")
 onready var unit_panel = get_node("unit_manager/national_tabs")
 var unit_list 
 
-func _ready():
+
+func _ready(): 
 	unit_list = load("res://Assets/Configs/unit_list.gd").new().unit
 	for national in unit_list.keys():
 		var national_tab = Tabs.new()
@@ -19,14 +20,17 @@ func _ready():
 		var label = Label.new()
 		label.set_name("infantry")
 		label.set_text("infantry")
-		unit_panel.get_node(national+"/units").add_child(label)
+		unit_panel.get_node(national + "/units").add_child(label)
 		var grid = GridContainer.new()
-		grid.set_name("infantry_"+"grid")
-		unit_panel.get_node(national+"/units").add_child(grid)
+		grid.set_name("infantry_" + "grid")
+		unit_panel.get_node(national + "/units").add_child(grid)
 		for unit in unit_list[national]:
 			var button = Button.new()
 			button.set_name(unit)
-			button.set_button_icon(load("res://Assets/Textures/Units/"+unit+".png"))
+			var path_file_icon = "res://Assets/Textures/Units/" + unit + ".png"
+			if File.new().file_exists(path_file_icon) != true:
+				path_file_icon = "res://Assets/Textures/Units/default.png"
+			button.set_button_icon(load(path_file_icon + unit + ".png"))
 			button.connect("pressed", self, "_on_unit_select", [unit])
 			unit_panel.get_node(national+"/units/"+grid.get_name()).add_child(button)
 			 
