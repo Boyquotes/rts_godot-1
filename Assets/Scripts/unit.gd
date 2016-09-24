@@ -51,6 +51,7 @@ func _fixed_process(delta):
 			last_pos = get_global_pos()
 
 func selecting(s, l):
+
 	var sx = false
 	var sy = false
 	var x = false
@@ -82,9 +83,10 @@ func selecting(s, l):
 	if x and y: 
 		current_color_unit = select_color_unit
 		select = true
-		um.unit_select_group.append(self) 
+		if not(self in um.unit_select_group): 
+			um.unit_select_group.append(self) 
 	else:
 		current_color_unit = diffuse_color_unit
 		select = false 
-		um.unit_select_group.clear()
+		um.unit_select_group.erase(self)
 	set_modulate(current_color_unit)

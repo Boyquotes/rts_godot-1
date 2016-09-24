@@ -8,17 +8,7 @@ var dead_zone = 4
 
 func _ready(): 
 	add_unit("Timofffee", "spearman", Vector2(2,20))
-	add_unit("Timofffee", "spearman", Vector2(30,20))
-	add_unit("Timofffee", "spearman", Vector2(40,30))
-	add_unit("Timofffee", "spearman", Vector2(50,30))
-	add_unit("Timofffee", "spearman", Vector2(60,10))
-	add_unit("Timofffee", "spearman", Vector2(70,50))
-	add_unit("Timofffee", "spearman", Vector2(80,60))
-	add_unit("Timofffee", "spearman", Vector2(90,10))
-	add_unit("Timofffee", "spearman", Vector2(55,5))
-	add_unit("Timofffee", "spearman", Vector2(25,10))
-	add_unit("Timofffee", "spearman", Vector2(15,20))
-	add_unit("Timofffee", "spearman", Vector2(10,5))
+
 	set_fixed_process(true)
 
 func _fixed_process(delta):
