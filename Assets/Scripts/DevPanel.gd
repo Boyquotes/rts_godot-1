@@ -30,7 +30,7 @@ func _ready():
 			var path_file_icon = "res://Assets/Textures/Units/" + unit + ".png"
 			if File.new().file_exists(path_file_icon) != true:
 				path_file_icon = "res://Assets/Textures/Units/default.png"
-			button.set_button_icon(load(path_file_icon + unit + ".png"))
+			button.set_button_icon(load(path_file_icon))
 			button.connect("pressed", self, "_on_unit_select", [unit])
 			unit_panel.get_node(national+"/units/"+grid.get_name()).add_child(button)
 			 
