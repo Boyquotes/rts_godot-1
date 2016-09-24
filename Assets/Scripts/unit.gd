@@ -7,6 +7,7 @@ var select = false
 var to_pos = Vector2()
 var last_pos = Vector2()
 var unit_class
+onready var um = get_parent()
 
 class Unit:
 	var ID
@@ -41,9 +42,6 @@ func _ready():
 	set_fixed_process(true)
 
 func _fixed_process(delta):
-	if Input.is_action_just_pressed("RKM") and select:
-		to_pos = get_tree().get_current_scene().get_node("Camera2D").get_global_mouse_pos()
-		print (to_pos)
 	if to_pos != last_pos:
 		if to_pos.distance_to(last_pos) < 2.0:
 			last_pos = to_pos
@@ -81,6 +79,12 @@ func selecting(s, l):
 	else:
 		if get_global_pos().y < l.y and (get_global_pos().y > s.y): y = true
 	
-	if x and y: current_color_unit = select_color_unit; select = true
-	else: current_color_unit = diffuse_color_unit; select = false
+	if x and y: 
+		current_color_unit = select_color_unit
+		select = true
+		um.unit_select_group.append(self) 
+	else:
+		current_color_unit = diffuse_color_unit
+		select = false 
+		um.unit_select_group.clear()
 	set_modulate(current_color_unit)
