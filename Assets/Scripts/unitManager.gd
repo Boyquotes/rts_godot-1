@@ -7,8 +7,18 @@ onready var camera = get_tree().get_current_scene().get_node("Camera2D")
 var dead_zone = 4
 
 func _ready(): 
-	add_unit("Timofffee", "spearman", Vector2(2,20))
-
+	add_unit("Timofffee", "spearman", Vector2(2,10))
+	add_unit("Timofffee", "spearman", Vector2(20,10))	
+	add_unit("Timofffee", "spearman", Vector2(30,40))
+	add_unit("Timofffee", "spearman", Vector2(40,50))
+	add_unit("Timofffee", "spearman", Vector2(50,30))	
+	add_unit("Timofffee", "spearman", Vector2(60,20))
+	add_unit("Timofffee", "spearman", Vector2(70,20))
+	add_unit("Timofffee", "spearman", Vector2(20,70))	
+	add_unit("Timofffee", "spearman", Vector2(20,80))
+	add_unit("Timofffee", "spearman", Vector2(40,10))
+	add_unit("Timofffee", "spearman", Vector2(90,20))	
+	add_unit("Timofffee", "spearman", Vector2(20,20))
 	set_fixed_process(true)
 
 func _fixed_process(delta):
