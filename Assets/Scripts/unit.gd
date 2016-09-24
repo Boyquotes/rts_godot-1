@@ -3,6 +3,10 @@ extends Sprite
 export var diffuse_color_unit = Color(1,0.1,0.1)
 export var select_color_unit = Color(0.1,1,0.1)
 var current_color_unit = diffuse_color_unit
+var select = false
+var to_pos = Vector2()
+var last_pos = Vector2()
+var unit_class
 
 class Unit:
 	var ID
@@ -34,6 +38,19 @@ class Unit:
 func _ready():
 	add_to_group("player_army")
 	set_modulate(current_color_unit)
+	set_fixed_process(true)
+
+func _fixed_process(delta):
+	if Input.is_action_just_pressed("RKM") and select:
+		to_pos = get_tree().get_current_scene().get_node("Camera2D").get_global_mouse_pos()
+		print (to_pos)
+	if to_pos != last_pos:
+		if to_pos.distance_to(last_pos) < 2.0:
+			last_pos = to_pos
+		else:
+			var vec = (to_pos - get_global_pos()).normalized()
+			set_global_pos(get_global_pos() + vec * unit_class.speed)   
+			last_pos = get_global_pos()
 
 func selecting(s, l):
 	var sx = false
@@ -64,6 +81,6 @@ func selecting(s, l):
 	else:
 		if get_global_pos().y < l.y and (get_global_pos().y > s.y): y = true
 	
-	if x and y: current_color_unit = select_color_unit
-	else: current_color_unit = diffuse_color_unit
+	if x and y: current_color_unit = select_color_unit; select = true
+	else: current_color_unit = diffuse_color_unit; select = false
 	set_modulate(current_color_unit)
