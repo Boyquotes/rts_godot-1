@@ -11,7 +11,7 @@ onready var um = get_parent()
 
 class Unit:
 	var ID
-	var type          #	var type = "solider"
+	var type = null   #	var type = "solider"
 	var unit
 	var health        #	var health = 12
 	var morale        #	var morale = 8
@@ -31,7 +31,7 @@ class Unit:
 			for tkk in unit_conf.unit[self.national][tk].keys():
 				if tkk == unit:
 					self.type = tk
-				break
+					break
 			if (self.type != null): break
 		self.cord = cord
 		var conf_uni = unit_conf.unit[self.national][self.type][self.unit]

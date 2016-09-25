@@ -8,7 +8,7 @@ var unit = {"Poland":
 						"strange" : 14,
 						"strange_speed" : 0.8,
 						"strange_type" : "mille",
-						"speed" : 4,
+						"speed" : 0.6,
 						"demoral" : 1},
 					"bowmen":
 						{"health" : 4,
@@ -16,7 +16,7 @@ var unit = {"Poland":
 						"strange" : 12,
 						"strange_speed" : 1.2,
 						"strange_type" : "long-range",
-						"speed" : 3.7,
+						"speed" : 0.86,
 						"demoral" : 2}
 					},
 				"cavalry":
@@ -26,7 +26,7 @@ var unit = {"Poland":
 						"strange" : 21,
 						"strange_speed" : 1.1,
 						"strange_type" : "cavalry",
-						"speed" : 8,
+						"speed" : 1.8,
 						"demoral" : 8},
 					"elear":
 						{"health" : 18,
@@ -34,7 +34,7 @@ var unit = {"Poland":
 						"strange" : 14,
 						"strange_speed" : 1.4,
 						"strange_type" : "cavalry long-range",
-						"speed" : 9,
+						"speed" : 2.1,
 						"demoral" : 6}
 					}
 				}
