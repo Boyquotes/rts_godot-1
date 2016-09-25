@@ -12,6 +12,7 @@ onready var um = get_parent()
 class Unit:
 	var ID
 	var type          #	var type = "solider"
+	var unit
 	var health        #	var health = 12
 	var morale        #	var morale = 8
 	var strange       #	var strange = 14
@@ -21,13 +22,19 @@ class Unit:
 	var speed         #	var speed = 4
 	var demoral       #var demoral = 1
 	var cord
-	func _init(player, type, cord):
+	func _init(player, unit, cord):
 		var unit_conf = load ("res://Assets/Configs/unit_list.gd").new()
 		self.ID = player["ID"]
-		self.type = type
+		self.unit = unit
 		self.national = player["national"]
+		for tk in unit_conf.unit[self.national].keys():
+			for tkk in unit_conf.unit[self.national][tk].keys():
+				if tkk == unit:
+					self.type = tk
+				break
+			if (self.type != null): break
 		self.cord = cord
-		var conf_uni = unit_conf.unit[self.national][self.type]
+		var conf_uni = unit_conf.unit[self.national][self.type][self.unit]
 		self.health = conf_uni["health"]
 		self.morale = conf_uni["morale"]
 		self.strange = conf_uni["strange"]
@@ -43,15 +50,14 @@ func _ready():
 
 func _fixed_process(delta):
 	if to_pos != last_pos:
-		if to_pos.distance_to(last_pos) < 2.0:
+		if to_pos.distance_to(last_pos) < 1.0:
 			last_pos = to_pos
 		else:
 			var vec = (to_pos - get_global_pos()).normalized()
-			set_global_pos(get_global_pos() + vec * unit_class.speed)   
+			set_global_pos(get_global_pos() + vec * unit_class.speed/2)   
 			last_pos = get_global_pos()
 
 func selecting(s, l):
-
 	var sx = false
 	var sy = false
 	var x = false
