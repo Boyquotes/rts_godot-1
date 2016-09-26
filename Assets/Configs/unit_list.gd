@@ -1,6 +1,6 @@
 extends Node
 
-var unit = {"Poland":
+var units = {"Poland":
 				{"infantry":
 					{"spearman": 
 						{"health" : 10,

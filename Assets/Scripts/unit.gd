@@ -27,14 +27,14 @@ class Unit:
 		self.ID = player["ID"]
 		self.unit = unit
 		self.national = player["national"]
-		for tk in unit_conf.unit[self.national].keys():
-			for tkk in unit_conf.unit[self.national][tk].keys():
+		for tk in unit_conf.units[self.national].keys():
+			for tkk in unit_conf.units[self.national][tk].keys():
 				if tkk == unit:
 					self.type = tk
 					break
 			if (self.type != null): break
 		self.cord = cord
-		var conf_uni = unit_conf.unit[self.national][self.type][self.unit]
+		var conf_uni = unit_conf.units[self.national][self.type][self.unit]
 		self.health = conf_uni["health"]
 		self.morale = conf_uni["morale"]
 		self.strange = conf_uni["strange"]

@@ -8,7 +8,7 @@ onready var unit_panel = get_node("unit_manager/national_tabs")
 var unit_list # конфигурация юнитов
 
 func _ready():
-	unit_list = load("res://Assets/Configs/unit_list.gd").new().unit
+	unit_list = load("res://Assets/Configs/unit_list.gd").new().units
 	for national in unit_list.keys():
 		#создание раздела национальности
 		var national_tab = Tabs.new()

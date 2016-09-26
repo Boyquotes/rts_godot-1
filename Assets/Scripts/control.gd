@@ -10,6 +10,7 @@ var last_point = Vector2()
 func _process(delta):
 	if not(Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible()):
 		if Input.is_action_just_pressed("LKM"):
+			get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
 			start_point = cam.get_global_mouse_pos()
 		if Input.is_action_pressed("LKM"):
 			last_point = cam.get_global_mouse_pos()

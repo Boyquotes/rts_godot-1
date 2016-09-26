@@ -50,7 +50,7 @@ script/script = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-layer = 1
+layer = 2
 offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
@@ -88,6 +88,46 @@ margin/left = 2.0
 margin/top = -367.0
 margin/right = 374.0
 margin/bottom = -534.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TargetPanel/target_manager"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 76.0
+margin/bottom = 167.0
+scroll/horizontal = true
+scroll/vertical = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 33.0
+margin/bottom = 14.0
+alignment = 0
+
+[node name="LabelProp" type="Label" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer/VBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 33.0
+margin/bottom = 14.0
+text = "Prop:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 
 [editable path="terra"]
