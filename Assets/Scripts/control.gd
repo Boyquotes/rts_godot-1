@@ -1,7 +1,7 @@
 extends Node2D
 # George Linkovsky - GovnoCode (2016)
 onready var cam = get_node("../Camera2D")
-onready var dev_panel = get_node("../DevPanel")
+onready var dev_panel = get_node("../CanvasLayer/DevPanel")
 export var select_color = Color(0,1,0,0.1)
 export var select_color_border = Color(0,1,0)
 var start_point = Vector2()

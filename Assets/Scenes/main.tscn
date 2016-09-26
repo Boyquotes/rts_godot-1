@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Assets/Scripts/players.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Scripts/control.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Scenes/terra.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Scripts/unitManager.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Scenes/DevPanel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Scripts/targetManager.gd" type="Script" id=6]
 
 [node name="main" type="Node2D"]
 
@@ -47,8 +48,47 @@ z/z = -1
 
 script/script = ExtResource( 4 )
 
-[node name="DevPanel" parent="." instance=ExtResource( 5 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="DevPanel" parent="CanvasLayer" instance=ExtResource( 5 )]
+
+anchor/left = 1
+anchor/right = 1
+margin/left = 1024.0
+margin/right = 984.0
+
+[node name="TargetPanel" type="Control" parent="CanvasLayer"]
+
+anchor/top = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 600.0
+margin/right = 64.0
+margin/bottom = 536.0
+script/script = ExtResource( 6 )
+
+[node name="target_manager" type="Panel" parent="CanvasLayer/TargetPanel"]
+
+anchor/top = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 2.0
+margin/top = -367.0
+margin/right = 374.0
+margin/bottom = -534.0
 
 
 [editable path="terra"]
-[editable path="DevPanel"]
+[editable path="CanvasLayer/DevPanel"]

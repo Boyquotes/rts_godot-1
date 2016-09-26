@@ -2,10 +2,10 @@ extends Control
 
 var current_unit = null
 
-onready var cam = get_node("../Camera2D")
-onready var u_inst = get_node("../terra/units")
+onready var cam = get_node("../../Camera2D")
+onready var u_inst = get_node("../../terra/units")
 onready var unit_panel = get_node("unit_manager/national_tabs")
-var unit_list 
+var unit_list # конфигурация юнитов
 
 func _ready():
 	unit_list = load("res://Assets/Configs/unit_list.gd").new().unit
