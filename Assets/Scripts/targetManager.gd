@@ -23,11 +23,12 @@ func _process(delta):
 			for key in d:
 				var button = Button.new()
 				button.set_name(key)
+				button.set_text(str(d[key]))
 				var path_file_icon = "res://Assets/Textures/Units/" + key + ".png"
 				if File.new().file_exists(path_file_icon) != true:
 					path_file_icon = "res://Assets/Textures/Units/default.png"
 				button.set_button_icon(load(path_file_icon))
-				button.set_text(str(d[key]))
+				
 				button.set_flat(true)
 				button.add_color_override("font_color", font_color)
 				prop.add_child(button)
