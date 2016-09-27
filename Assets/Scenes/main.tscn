@@ -98,10 +98,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 56.0
+margin/left = 65.0
 margin/top = 30.0
-margin/right = 134.0
-margin/bottom = 128.0
+margin/right = 316.0
+margin/bottom = 149.0
 scroll/horizontal = false
 scroll/vertical = false
 
@@ -114,7 +114,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 37.0
-margin/bottom = 14.0
+margin/bottom = 18.0
 alignment = 0
 
 [node name="LabelProp" type="Label" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer/VBoxContainer"]
@@ -132,6 +132,18 @@ text = "INFO:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 18.0
+margin/right = 37.0
+margin/bottom = 18.0
+columns = 4
 
 
 [editable path="terra"]
