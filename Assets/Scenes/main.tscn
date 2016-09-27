@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://Assets/Scripts/players.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Scripts/control.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Scripts/unitManager.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Scenes/DevPanel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Scripts/targetManager.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Textures/scroll.png" type="Texture" id=7]
 
 [node name="main" type="Node2D"]
 
@@ -76,18 +77,19 @@ margin/right = 64.0
 margin/bottom = 536.0
 script/script = ExtResource( 6 )
 
-[node name="target_manager" type="Panel" parent="CanvasLayer/TargetPanel"]
+[node name="target_manager" type="TextureFrame" parent="CanvasLayer/TargetPanel"]
 
-anchor/top = 1
-anchor/bottom = 1
-focus/ignore_mouse = false
+focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 2.0
-margin/top = -367.0
-margin/right = 374.0
-margin/bottom = -534.0
+margin/left = -1.0
+margin/top = 421.0
+margin/right = 370.0
+margin/bottom = 599.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TargetPanel/target_manager"]
 
@@ -95,12 +97,12 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 76.0
-margin/bottom = 167.0
-scroll/horizontal = true
-scroll/vertical = true
+margin/left = 56.0
+margin/top = 30.0
+margin/right = 134.0
+margin/bottom = 128.0
+scroll/horizontal = false
+scroll/vertical = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer"]
 
@@ -110,7 +112,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 33.0
+margin/right = 37.0
 margin/bottom = 14.0
 alignment = 0
 
@@ -122,9 +124,10 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 33.0
+margin/right = 37.0
 margin/bottom = 14.0
-text = "Prop:"
+custom_colors/font_color = Color( 0.464844, 0, 0, 1 )
+text = "INFO:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

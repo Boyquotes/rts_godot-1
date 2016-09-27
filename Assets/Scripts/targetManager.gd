@@ -22,6 +22,7 @@ func _process(delta):
 			for key in d:
 				var label = Label.new()
 				label.set_text(key + ' ' + str(d[key]))
+				label.add_color_override("font_color", Color(0,0,0))
 				prop.add_child(label)
 		i += 1
 	else:
