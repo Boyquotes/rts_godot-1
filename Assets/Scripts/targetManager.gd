@@ -28,7 +28,8 @@ func _process(delta):
 				if File.new().file_exists(path_file_icon) != true:
 					path_file_icon = "res://Assets/Textures/Units/default.png"
 				button.set_button_icon(load(path_file_icon))
-				
+				button.set_stop_mouse(true)
+				button.set_ignore_mouse(true)
 				button.set_flat(true)
 				button.add_color_override("font_color", font_color)
 				prop.add_child(button)

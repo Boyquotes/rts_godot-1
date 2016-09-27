@@ -6,20 +6,22 @@ export var select_color = Color(0,1,0,0.1)
 export var select_color_border = Color(0,1,0)
 var start_point = Vector2()
 var last_point = Vector2()
+var lock = false
 
 func _process(delta):
-	if not(Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible()):
-		if Input.is_action_just_pressed("LKM"):
-			get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
-			start_point = cam.get_global_mouse_pos()
-		if Input.is_action_pressed("LKM"):
-			last_point = cam.get_global_mouse_pos()
-			update()
-		elif Input.is_action_just_released("LKM"):
-			get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
-			start_point = Vector2()
-			last_point = Vector2()
-			update() 
+	if lock == false:
+		if not(Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible()):
+			if Input.is_action_just_pressed("LKM"):
+				get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
+				start_point = cam.get_global_mouse_pos()
+			if Input.is_action_pressed("LKM"):
+				last_point = cam.get_global_mouse_pos()
+				update()
+			elif Input.is_action_just_released("LKM"):
+				get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
+				start_point = Vector2()
+				last_point = Vector2()
+				update() 
 
 func draw_select_area():
 	draw_rect(Rect2(start_point, last_point-start_point), select_color)
@@ -33,11 +35,18 @@ func _draw():
 
 func _ready():
 	set_process(true)
-	
-	
+
+func _on_target_manager_mouse_enter():
+	lock = true
+
+func _on_target_manager_mouse_exit():
+	lock = false
+
 #if Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible():
 #	get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
 #	start_point = Vector2()
 #	last_point = Vector2()
 #	update() 
 #else:
+
+

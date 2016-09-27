@@ -69,7 +69,7 @@ margin/right = 984.0
 
 anchor/right = 1
 anchor/bottom = 1
-focus/ignore_mouse = false
+focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
@@ -84,21 +84,21 @@ font_color = Color( 0, 0, 0, 1 )
 
 anchor/top = 1
 anchor/bottom = 1
-focus/ignore_mouse = true
-focus/stop_mouse = true
+focus/ignore_mouse = false
+focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = -1.0
-margin/top = -357.0
-margin/right = 370.0
-margin/bottom = -535.0
+margin/top = -329.0
+margin/right = 376.0
+margin/bottom = -526.0
 texture = ExtResource( 7 )
 expand = true
 stretch_mode = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TargetPanel/target_manager"]
 
-focus/ignore_mouse = false
+focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
@@ -111,8 +111,8 @@ scroll/vertical = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
@@ -139,8 +139,8 @@ max_lines_visible = -1
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer/VBoxContainer"]
 
-focus/ignore_mouse = false
-focus/stop_mouse = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
@@ -177,6 +177,10 @@ shortcut = null
 icon = ExtResource( 9 )
 flat = false
 clip_text = true
+
+[connection signal="mouse_enter" from="CanvasLayer/TargetPanel/target_manager" to="Control" method="_on_target_manager_mouse_enter"]
+
+[connection signal="mouse_exit" from="CanvasLayer/TargetPanel/target_manager" to="Control" method="_on_target_manager_mouse_exit"]
 
 [connection signal="pressed" from="CanvasLayer/MapMode/bt_ch_background_map" to="CanvasLayer/MapMode" method="_on_bt_ch_background_map_pressed"]
 
