@@ -9,7 +9,7 @@ func _ready():
 	# Initialization here
 	pass
 
-onready var terra = get_node('../../terra')
+onready var terra = get_node('../../world')
 onready var bt_ch_bkgr_map = get_node('bt_ch_background_map')
 var path_file_icon1 = 'res://Assets/Textures/Map/grass.png'
 var path_file_icon2 = 'res://Assets/Textures/Map/grass2.png'

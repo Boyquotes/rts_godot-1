@@ -4,7 +4,7 @@ extends Control
 # var a = 2
 # var b = "textvar"
 export var font_color = Color(0,0,0)
-onready var u_inst = get_node("../../terra/units")
+onready var u_inst = get_node("../../world/units")
 onready var prop = get_node("target_manager/ScrollContainer/VBoxContainer/GridContainer")
 func _ready():
 	set_process(true)

@@ -3,7 +3,7 @@ extends Control
 var current_unit = null
 
 onready var cam = get_node("../../Camera2D")
-onready var u_inst = get_node("../../terra/units")
+onready var u_inst = get_node("../../world/units")
 onready var unit_panel = get_node("unit_manager/national_tabs")
 var unit_list # конфигурация юнитов
 
