@@ -76,6 +76,7 @@ margin/top = 600.0
 margin/right = 64.0
 margin/bottom = 536.0
 script/script = ExtResource( 6 )
+font_color = Color( 0, 0, 0, 1 )
 
 [node name="target_manager" type="TextureFrame" parent="CanvasLayer/TargetPanel"]
 

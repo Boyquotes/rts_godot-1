@@ -3,6 +3,7 @@ extends Control
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
+export var font_color = Color(0,0,0)
 onready var u_inst = get_node("../../terra/units")
 onready var prop = get_node("target_manager/ScrollContainer/VBoxContainer")
 func _ready():
@@ -21,8 +22,8 @@ func _process(delta):
 					d[unit.unit_class.type] = 1
 			for key in d:
 				var label = Label.new()
-				label.set_text(key + ' ' + str(d[key]))
-				label.add_color_override("font_color", Color(0,0,0))
+				label.set_text(' ' + key + ' ' + str(d[key]))
+				label.add_color_override("font_color", font_color)
 				prop.add_child(label)
 		i += 1
 	else:
