@@ -5,57 +5,6 @@ var unit_scene = preload("res://Assets/Scenes/unit.tscn")
 var unit_select_group = []
 onready var camera = get_tree().get_current_scene().get_node("Camera2D")
 var distance = 10
-var company_distance = 50
-var unitFilling = [	FillEntry.new(2,2),
-					FillEntry.new(2,3),
-					FillEntry.new(2,1),
-					FillEntry.new(2,4),
-					FillEntry.new(2,0),
-					FillEntry.new(3,2),
-					FillEntry.new(3,3),
-					FillEntry.new(3,1),
-					FillEntry.new(3,4),
-					FillEntry.new(3,0),
-					FillEntry.new(1,2),
-					FillEntry.new(1,3),
-					FillEntry.new(1,1),
-					FillEntry.new(1,4),
-					FillEntry.new(1,0),
-					FillEntry.new(4,2),
-					FillEntry.new(4,3),
-					FillEntry.new(4,1),
-					FillEntry.new(4,4),
-					FillEntry.new(4,0),
-					FillEntry.new(0,2),
-					FillEntry.new(0,3),
-					FillEntry.new(0,1),
-					FillEntry.new(0,4),
-					FillEntry.new(0,0)]
-var companyFilling=[FillEntry.new(2,2),
-					FillEntry.new(2,3),
-					FillEntry.new(2,1),
-					FillEntry.new(2,4),
-					FillEntry.new(2,0),
-					FillEntry.new(3,2),
-					FillEntry.new(3,3),
-					FillEntry.new(3,1),
-					FillEntry.new(3,4),
-					FillEntry.new(3,0),
-					FillEntry.new(1,2),
-					FillEntry.new(1,3),
-					FillEntry.new(1,1),
-					FillEntry.new(1,4),
-					FillEntry.new(1,0),
-					FillEntry.new(4,2),
-					FillEntry.new(4,3),
-					FillEntry.new(4,1),
-					FillEntry.new(4,4),
-					FillEntry.new(4,0),
-					FillEntry.new(0,2),
-					FillEntry.new(0,3),
-					FillEntry.new(0,1),
-					FillEntry.new(0,4),
-					FillEntry.new(0,0)]
 
 class FillEntry:
 	var x
@@ -64,29 +13,28 @@ class FillEntry:
 		x = X
 		y = Y
 
-var companyCord = [	[Vector2(-company_distance*2, company_distance*2),	Vector2(-company_distance, company_distance*2),	Vector2(0, company_distance*2),	Vector2(company_distance, company_distance*2),	Vector2(company_distance*2, company_distance*2)],
-					[Vector2(-company_distance*2, company_distance),	Vector2(-company_distance, company_distance),	Vector2(0, company_distance),	Vector2(company_distance, company_distance),	Vector2(company_distance*2, company_distance)],
-					[Vector2(-company_distance*2, 0),					Vector2(-company_distance, 0),					Vector2(0, 0),					Vector2(company_distance, 0),					Vector2(company_distance*2, 0)],
-					[Vector2(-company_distance*2, -company_distance),	Vector2(-company_distance, -company_distance),	Vector2(0, -company_distance),	Vector2(company_distance, -company_distance),	Vector2(company_distance*2, -company_distance)],
-					[Vector2(-company_distance*2, -company_distance*2),	Vector2(-company_distance, -company_distance*2),Vector2(0, -company_distance*2),Vector2(company_distance, -company_distance*2),	Vector2(company_distance*2, -company_distance*2)]]
-
-# Линейно, рядами, распределение от центра.
-var coordinates = [     [Vector2(-distance*2, distance*2),	Vector2(-distance, distance*2),	Vector2(0, distance*2),	Vector2(distance, distance*2),	Vector2(distance*2, distance*2)],
-						[Vector2(-distance*2, distance),	Vector2(-distance, distance),	Vector2(0, distance),	Vector2(distance, distance),	Vector2(distance*2, distance)],
-						[Vector2(-distance*2, 0),			Vector2(-distance, 0),			Vector2(0, 0),			Vector2(distance, 0),			Vector2(distance*2, 0)],
-						[Vector2(-distance*2, -distance),	Vector2(-distance, -distance),	Vector2(0, -distance),	Vector2(distance, -distance),	Vector2(distance*2, -distance)],
-						[Vector2(-distance*2, -distance*2),	Vector2(-distance, -distance*2),Vector2(0, -distance*2),Vector2(distance, -distance*2),	Vector2(distance*2, -distance*2)]]
-
 func PlaceUnits(unit_list):
+	var k = sqrt(unit_list.size())
+	if  (k - floor(k)) != 0:
+		k = int(k) + 1
+	else:
+		k = int(k)
+	var co = []
+	var uf = []
+	for x in range(0, k): 
+		var tmp = []
+		for y in range(0, k):
+			tmp.append(Vector2(distance * x, distance * y))
+			uf.append(FillEntry.new(x,y))
+			print (x,y)
+		co.append(tmp)
+	print (co)
 	var pos = 0
-	var cpos = 0
 	for Unit in unit_list:
-		if (pos >= 25): pos = 0; cpos += 1
-		if (cpos >= 25): continue
-		var fe = unitFilling[pos]
-		var ce = companyFilling[cpos]
+		#перемешает точки в позиции построения
+		Unit.to_pos = co[uf[pos].x][uf[pos].y]+camera.get_global_mouse_pos()
 		pos += 1
-		Unit.to_pos = coordinates[fe.x][fe.y]+camera.get_global_mouse_pos() + companyCord[ce.x][ce.y]
+
 	
 func _ready(): 
 #	add_unit("Timofffee", "spearman", Vector2(2,20))
