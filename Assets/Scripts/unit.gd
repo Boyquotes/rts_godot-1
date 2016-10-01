@@ -15,13 +15,15 @@ class Unit:
 	var unit
 	var health        #	var health = 12
 	var morale        #	var morale = 8
-	var strange       #	var strange = 14
-	var strange_speed 
-	var strange_type  #	var strange_type = 1
+	var power        #	var strange = 14
+	var power_speed 
+	var power_type  #	var strange_type = 1
 	var national      #	var national = "poland"
 	var speed         #	var speed = 4
 	var demoral       #var demoral = 1
 	var cord
+	var type_form = null
+	var tag = null
 	func _init(player, unit, cord):
 		var unit_conf = load ("res://Assets/Configs/unit_list.gd").new()
 		self.ID = player["ID"]
@@ -37,9 +39,9 @@ class Unit:
 		var conf_uni = unit_conf.units[self.national][self.type][self.unit]
 		self.health = conf_uni["health"]
 		self.morale = conf_uni["morale"]
-		self.strange = conf_uni["strange"]
-		self.strange_speed = conf_uni["strange_speed"]
-		self.strange_type = conf_uni["strange_type"]
+		self.power = conf_uni["power"]
+		self.power_speed = conf_uni["power_speed"]
+		self.power_type = conf_uni["power_type"]
 		self.speed = conf_uni["speed"]
 		self.demoral = conf_uni["demoral"]
 
