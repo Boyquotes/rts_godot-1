@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://Assets/Scripts/players.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Scripts/control.gd" type="Script" id=2]
@@ -8,8 +8,10 @@
 [ext_resource path="res://Assets/Scenes/DevPanel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Scripts/targetManager.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Textures/Panels/scroll.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Scripts/mapManager.gd" type="Script" id=9]
-[ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Textures/Control/box.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Textures/Control/fillbox.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Scripts/mapManager.gd" type="Script" id=11]
+[ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=12]
 
 [node name="main" type="Node2D"]
 
@@ -96,11 +98,55 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = -1.0
 margin/top = -329.0
-margin/right = 376.0
+margin/right = 499.0
 margin/bottom = -526.0
 texture = ExtResource( 8 )
 expand = true
 stretch_mode = 0
+
+[node name="GridContainer1" type="GridContainer" parent="CanvasLayer/TargetPanel/target_manager"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 322.0
+margin/top = 30.0
+margin/right = 423.0
+margin/bottom = 150.0
+columns = 4
+
+[node name="Button" type="Button" parent="CanvasLayer/TargetPanel/target_manager/GridContainer1"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 44.0
+margin/bottom = 38.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+icon = ExtResource( 9 )
+flat = true
+
+[node name="Button1" type="Button" parent="CanvasLayer/TargetPanel/target_manager/GridContainer1"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 48.0
+margin/top = 0.0
+margin/right = 92.0
+margin/bottom = 38.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+icon = ExtResource( 10 )
+flat = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TargetPanel/target_manager"]
 
@@ -165,7 +211,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 40.0
-script/script = ExtResource( 9 )
+script/script = ExtResource( 11 )
 
 [node name="bt_ch_background_map" type="Button" parent="CanvasLayer/MapMode"]
 
@@ -180,13 +226,15 @@ margin/bottom = 38.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-icon = ExtResource( 10 )
+icon = ExtResource( 12 )
 flat = false
 clip_text = true
 
 [connection signal="mouse_enter" from="CanvasLayer/TargetPanel/target_manager" to="Control" method="_on_target_manager_mouse_enter"]
 
 [connection signal="mouse_exit" from="CanvasLayer/TargetPanel/target_manager" to="Control" method="_on_target_manager_mouse_exit"]
+
+[connection signal="pressed" from="CanvasLayer/TargetPanel/target_manager/GridContainer1/Button" to="CanvasLayer/TargetPanel" method="_on_Button_pressed"]
 
 [connection signal="pressed" from="CanvasLayer/MapMode/bt_ch_background_map" to="CanvasLayer/MapMode" method="_on_bt_ch_background_map_pressed"]
 

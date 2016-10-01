@@ -40,3 +40,6 @@ func _process(delta):
 				prop.remove_child(unit)
 		i = 0
 		hide()
+
+func _on_Button_pressed():
+	pass

@@ -5,7 +5,13 @@ var unit_scene = preload("res://Assets/Scenes/unit.tscn")
 var unit_select_group = []
 onready var camera = get_tree().get_current_scene().get_node("Camera2D")
 var distance = 10
+var groups = 0
 
+func rotate(vector, rad=0.785398):
+	var x = vector.x * cos(rad) - vector.y * sin(rad)
+	var y = vector.x * sin(rad) + vector.y * cos(rad)
+	return Vector2(x,y)
+	
 class FillEntry:
 	var x
 	var y
@@ -13,7 +19,8 @@ class FillEntry:
 		x = X
 		y = Y
 
-func PlaceUnits(unit_list):
+func fill_box(unit_list):
+	groups += 1
 	var k = sqrt(unit_list.size())
 	if  (k - floor(k)) != 0:
 		k = int(k) + 1
@@ -28,12 +35,45 @@ func PlaceUnits(unit_list):
 			uf.append(FillEntry.new(x,y))
 			print (x,y)
 		co.append(tmp)
-	print (co)
-	var pos = 0
-	for Unit in unit_list:
-		#перемешает точки в позиции построения
-		Unit.to_pos = co[uf[pos].x][uf[pos].y]+camera.get_global_mouse_pos()
-		pos += 1
+	#print (co)
+	return [co, uf]
+
+func box(unit_list):
+	var n = unit_list.size()
+	var k = 1
+	while (sqrt(n + k) - floor(sqrt(n + k))) != 0:
+		k += 1
+	var r = n + k
+	var l = sqrt(r)
+	var f = pow((l-2), 2)
+	#print ('r:',r,' n:',n,' f:',f)
+	if r == n + f:
+		groups += 1
+		var co = []
+		var uf = []
+		for x in range(0, l):
+			var tmp = []
+			for y in range(0, l):
+				if x == 0 or y == 0 or x == l-1 or y == l-1:
+					tmp.append(Vector2(distance * x, distance * y))
+					uf.append(FillEntry.new(x,y))	
+				else:
+					tmp.append(null)
+			co.append(tmp)
+		print (co)
+		print(uf)
+		return [co, uf]
+
+func PlaceUnits(unit_list):
+	var result=fill_box(unit_list)
+	if result != null:
+		var co = result[0]
+		var uf = result[1]
+		var pos = 0
+		for Unit in unit_list:
+			#перемешает точки в позиции построения
+			Unit.to_pos = rotate(co[ uf[pos].x ][ uf[pos].y ])+camera.get_global_mouse_pos()
+			pos += 1
 
 	
 func _ready(): 
