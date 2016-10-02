@@ -36,11 +36,11 @@ func _draw():
 func _ready():
 	set_process(true)
 
-func _on_target_manager_mouse_enter():
-	lock = true
+#func _on_target_manager_mouse_enter():
+#	lock = true
 
-func _on_target_manager_mouse_exit():
-	lock = false
+#func _on_target_manager_mouse_exit():
+#	lock = false
 
 #if Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible():
 #	get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
@@ -48,5 +48,7 @@ func _on_target_manager_mouse_exit():
 #	last_point = Vector2()
 #	update() 
 #else:
+
+
 
 
