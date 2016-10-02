@@ -72,7 +72,6 @@ scale = Vector2( 1, 1 )
 
 [node name="DevPanel" parent="CanvasLayer" instance=ExtResource( 6 )]
 
-editor/display_folded = true
 anchor/left = 1
 anchor/right = 1
 margin/left = 1024.0
@@ -80,7 +79,6 @@ margin/right = 984.0
 
 [node name="TargetPanel" type="Control" parent="CanvasLayer"]
 
-editor/display_folded = true
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = true
@@ -94,7 +92,7 @@ margin/bottom = 535.0
 script/script = ExtResource( 7 )
 font_color = Color( 0, 0, 0, 1 )
 
-[node name="target_manager" type="TextureFrame" parent="CanvasLayer/TargetPanel"]
+[node name="targetManager" type="TextureFrame" parent="CanvasLayer/TargetPanel"]
 
 anchor/top = 1
 anchor/bottom = 1
@@ -110,7 +108,7 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 0
 
-[node name="GridContainer1" type="GridContainer" parent="CanvasLayer/TargetPanel/target_manager"]
+[node name="GridContainer1" type="GridContainer" parent="CanvasLayer/TargetPanel/targetManager"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -122,7 +120,7 @@ margin/right = 423.0
 margin/bottom = 150.0
 columns = 4
 
-[node name="Button" type="Button" parent="CanvasLayer/TargetPanel/target_manager/GridContainer1"]
+[node name="Button" type="Button" parent="CanvasLayer/TargetPanel/targetManager/GridContainer1"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -138,7 +136,7 @@ shortcut = null
 icon = ExtResource( 9 )
 flat = true
 
-[node name="Button1" type="Button" parent="CanvasLayer/TargetPanel/target_manager/GridContainer1"]
+[node name="Button1" type="Button" parent="CanvasLayer/TargetPanel/targetManager/GridContainer1"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -154,7 +152,7 @@ shortcut = null
 icon = ExtResource( 10 )
 flat = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TargetPanel/target_manager"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TargetPanel/targetManager"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -167,7 +165,7 @@ margin/bottom = 149.0
 scroll/horizontal = false
 scroll/vertical = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TargetPanel/targetManager/ScrollContainer"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -179,7 +177,7 @@ margin/right = 37.0
 margin/bottom = 18.0
 alignment = 0
 
-[node name="LabelProp" type="Label" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer/VBoxContainer"]
+[node name="LabelInfo" type="Label" parent="CanvasLayer/TargetPanel/targetManager/ScrollContainer/VBoxContainer"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -195,7 +193,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/TargetPanel/target_manager/ScrollContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/TargetPanel/targetManager/ScrollContainer/VBoxContainer"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -237,11 +235,11 @@ icon = ExtResource( 12 )
 flat = false
 clip_text = true
 
-[connection signal="mouse_enter" from="CanvasLayer/TargetPanel/target_manager" to="Control" method="_on_target_manager_mouse_enter"]
+[connection signal="mouse_enter" from="CanvasLayer/TargetPanel/targetManager" to="Control" method="_on_target_manager_mouse_enter"]
 
-[connection signal="mouse_exit" from="CanvasLayer/TargetPanel/target_manager" to="Control" method="_on_target_manager_mouse_exit"]
+[connection signal="mouse_exit" from="CanvasLayer/TargetPanel/targetManager" to="Control" method="_on_target_manager_mouse_exit"]
 
-[connection signal="pressed" from="CanvasLayer/TargetPanel/target_manager/GridContainer1/Button" to="CanvasLayer/TargetPanel" method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TargetPanel/targetManager/GridContainer1/Button" to="CanvasLayer/TargetPanel" method="_on_Button_pressed"]
 
 [connection signal="pressed" from="CanvasLayer/MapMode/bt_ch_background_map" to="CanvasLayer/MapMode" method="_on_bt_ch_background_map_pressed"]
 

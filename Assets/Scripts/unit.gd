@@ -6,13 +6,13 @@ var current_color_unit = diffuse_color_unit
 var select = false
 var to_pos = Vector2()
 var last_pos = Vector2()
-var unit_class
-onready var um = get_parent()
+var unit_obj
+onready var unit_manager = get_parent()
 
 class Unit:
 	var ID
 	var type = null   #	var type = "solider"
-	var unit
+	var unit_name
 	var health        #	var health = 12
 	var morale        #	var morale = 8
 	var power        #	var strange = 14
@@ -24,19 +24,19 @@ class Unit:
 	var cord
 	var type_form = null
 	var tag = null
-	func _init(player, unit, cord):
+	func _init(player, unit_name, cord):
 		var unit_conf = load ("res://Assets/Configs/unit_list.gd").new()
 		self.ID = player["ID"]
-		self.unit = unit
+		self.unit_name = unit_name
 		self.national = player["national"]
 		for tk in unit_conf.units[self.national].keys():
 			for tkk in unit_conf.units[self.national][tk].keys():
-				if tkk == unit:
+				if tkk == unit_name:
 					self.type = tk
 					break
 			if (self.type != null): break
 		self.cord = cord
-		var conf_uni = unit_conf.units[self.national][self.type][self.unit]
+		var conf_uni = unit_conf.units[self.national][self.type][self.unit_name]
 		self.health = conf_uni["health"]
 		self.morale = conf_uni["morale"]
 		self.power = conf_uni["power"]
@@ -56,7 +56,7 @@ func _fixed_process(delta):
 			last_pos = to_pos
 		else:
 			var vec = (to_pos - get_global_pos()).normalized()
-			set_global_pos(get_global_pos() + vec * unit_class.speed/2)   
+			set_global_pos(get_global_pos() + vec * unit_obj.speed / 2)   
 			last_pos = get_global_pos()
 
 func selecting(s, l):
@@ -66,7 +66,7 @@ func selecting(s, l):
 	var y = false
 	if s.x > l.x: sx = true
 	if s.y > l.y: sy = true
-	if (Vector2(abs(s.x - l.x), abs(s.y-l.y)) < Vector2(10,10) ):
+	if (Vector2(abs(s.x - l.x), abs(s.y - l.y)) < Vector2(10, 10) ):
 		if sx:
 			s.x +=8
 			l.x += -8
@@ -91,10 +91,10 @@ func selecting(s, l):
 	if x and y: 
 		current_color_unit = select_color_unit
 		select = true
-		if not(self in um.unit_select_group): 
-			um.unit_select_group.append(self) 
+		if not(self in unit_manager.unit_select_group): 
+			unit_manager.unit_select_group.append(self) 
 	else:
 		current_color_unit = diffuse_color_unit
 		select = false 
-		um.unit_select_group.erase(self)
+		unit_manager.unit_select_group.erase(self)
 	set_modulate(current_color_unit)

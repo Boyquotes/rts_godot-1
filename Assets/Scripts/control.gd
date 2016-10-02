@@ -12,7 +12,7 @@ func _process(delta):
 	if lock == false:
 		if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible()) or Input.is_key_pressed(KEY_SHIFT)):
 			if Input.is_action_just_pressed("LKM"):
-				get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
+				#get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
 				start_point = cam.get_global_mouse_pos()
 			if Input.is_action_pressed("LKM"):
 				last_point = cam.get_global_mouse_pos()

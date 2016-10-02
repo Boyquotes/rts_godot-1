@@ -1,6 +1,5 @@
 extends Node
 
-var playerList = {}
 #var playerList = {"Timofffee" : {
 #						"ID":0, 
 #						"national":"Random",
@@ -10,11 +9,12 @@ var playerList = {}
 #						"national":"Random",
 #						"type_player":"ai"}
 #				}
+var player_list = {}
 				
 func _ready():
 	add_player('Timofffee', 'human', 'Poland')
 	add_player('ai1', 'ai', 'Poland')
-	print (playerList)
+	print (player_list)
 	
 func add_player(name, type, national):
-	playerList[name] = {'ID':playerList.size(), "national":national, 'type_player':type}
+	player_list[name] = {'ID' : player_list.size(), "national" : national, 'type_player' : type}

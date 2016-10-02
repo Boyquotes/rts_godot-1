@@ -1,20 +1,19 @@
 extends Node2D
+
 var unit
-onready var players = get_node("../../Players")
 var unit_scene = preload("res://Assets/Scenes/unit.tscn")
-var unit_select_group = []
+onready var players = get_node("../../Players")
 onready var camera = get_tree().get_current_scene().get_node("Camera2D")
+var unit_select_group = []
 var distance = 10
 var groups = 0
 var count_tags = 0
 
 
-func rotate(vector, rad=0.785398):
+func rotate(vector, rad = 2.0944):# 0.785398
 	var x = vector.x * cos(rad) - vector.y * sin(rad)
 	var y = vector.x * sin(rad) + vector.y * cos(rad)
 	return Vector2(x,y)
-	
-	
 	
 class FillEntry:
 	var x
@@ -102,13 +101,13 @@ func _fixed_process(delta):
 		PlaceUnits (unit_select_group)
 			
 	if Input.is_action_just_pressed("Delete") and not unit_select_group.empty():
-		for u in unit_select_group:
-			u.free()
+		for unit in unit_select_group:
+			unit.free()
 		unit_select_group = [] 
 
 func add_unit(player_name, unit_name, unit_cord):
 	unit = unit_scene.instance()
-	unit.unit_class = unit.Unit.new(players.playerList[player_name], unit_name, unit_cord) 
-	unit.set_pos(unit.unit_class.cord) 
+	unit.unit_obj = unit.Unit.new(players.player_list[player_name], unit_name, unit_cord) 
+	unit.set_pos(unit.unit_obj.cord) 
 	add_child(unit)
   
