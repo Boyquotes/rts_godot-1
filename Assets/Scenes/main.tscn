@@ -39,7 +39,7 @@ limit/bottom = 10000000
 limit/smoothed = false
 drag_margin/h_enabled = true
 drag_margin/v_enabled = true
-smoothing/enable = false
+smoothing/enable = true
 smoothing/speed = 5.0
 drag_margin/left = 0.2
 drag_margin/top = 0.2
@@ -54,6 +54,10 @@ zoom_speed = 2.0
 [node name="world" parent="." instance=ExtResource( 4 )]
 
 z/z = -1
+
+[node name="TileMap_forest" parent="world"]
+
+cell/half_offset = 1
 
 [node name="units" type="Node2D" parent="world"]
 
@@ -75,6 +79,7 @@ margin/right = 984.0
 
 [node name="TargetPanel" type="Control" parent="CanvasLayer"]
 
+editor/display_folded = true
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = true

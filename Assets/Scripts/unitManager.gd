@@ -101,6 +101,10 @@ func _fixed_process(delta):
 	if Input.is_action_just_pressed("RKM") and not unit_select_group.empty():
 		PlaceUnits (unit_select_group)
 			
+	if Input.is_action_just_pressed("Delete") and not unit_select_group.empty():
+		for u in unit_select_group:
+			u.free()
+		unit_select_group = [] 
 
 func add_unit(player_name, unit_name, unit_cord):
 	unit = unit_scene.instance()
