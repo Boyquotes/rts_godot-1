@@ -1,9 +1,12 @@
-[gd_resource type="TileSet" load_steps=5 format=1]
+[gd_resource type="TileSet" load_steps=8 format=1]
 
 [ext_resource path="res://Assets/Textures/Map/grass.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Textures/Map/forest.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Textures/Map/forest2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/Map/forest3.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/Map/forest4.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/Map/forest5.png" type="Texture" id=7]
 
 [resource]
 
@@ -39,4 +42,28 @@
 3/navigation_offset = Vector2( 16, 16 )
 3/shape_offset = Vector2( 0, 0 )
 3/shapes = [  ]
+4/name = "forest 3"
+4/texture = ExtResource( 5 )
+4/tex_offset = Vector2( 0, 0 )
+4/region = Rect2( 0, 0, 32, 32 )
+4/occluder_offset = Vector2( 16, 16 )
+4/navigation_offset = Vector2( 16, 16 )
+4/shape_offset = Vector2( 0, 0 )
+4/shapes = [  ]
+5/name = "forest 4"
+5/texture = ExtResource( 6 )
+5/tex_offset = Vector2( 0, 0 )
+5/region = Rect2( 0, 0, 32, 32 )
+5/occluder_offset = Vector2( 16, 16 )
+5/navigation_offset = Vector2( 16, 16 )
+5/shape_offset = Vector2( 0, 0 )
+5/shapes = [  ]
+6/name = "forest 5"
+6/texture = ExtResource( 7 )
+6/tex_offset = Vector2( 0, 0 )
+6/region = Rect2( 0, 0, 32, 32 )
+6/occluder_offset = Vector2( 16, 16 )
+6/navigation_offset = Vector2( 16, 16 )
+6/shape_offset = Vector2( 0, 0 )
+6/shapes = [  ]
 

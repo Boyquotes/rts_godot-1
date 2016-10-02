@@ -27,11 +27,17 @@ class RndCoord:
 		if _z == 3:
 			x = -x
 
+				
+			
+
 class Map:
 	var map = []
 	const ID_GRASS = 0
 	const ID_FOREST = 1
 	const ID_FOREST2 = 2
+	const ID_FOREST3 = 3
+	const ID_FOREST4 = 4
+	const ID_FOREST5 = 5
 	const ID_GRASS2 = 3
 	var DEFAULT_GRASS = ID_GRASS
 
@@ -73,7 +79,7 @@ class Map:
 					count_obj += 1
 	
 	func gen_forest(size_x, size_y, count_forest, count_tree):
-		gen_rnd_struct(size_x, size_y, count_forest, count_tree, [ID_FOREST, ID_FOREST2])
+		gen_rnd_struct(size_x, size_y, count_forest, count_tree, [ID_FOREST, ID_FOREST2,ID_FOREST3,ID_FOREST4,ID_FOREST5])
 	
 	func set_default_grass(n):
 		DEFAULT_GRASS = n

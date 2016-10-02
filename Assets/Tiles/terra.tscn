@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://Assets/Textures/Map/grass.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Textures/Map/forest.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Textures/Map/forest2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Textures/Map/forest.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Textures/Map/forest2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Textures/Map/forest3.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Textures/Map/forest4.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Textures/Map/forest5.png" type="Texture" id=7]
 
 [node name="terra" type="Node2D"]
 
@@ -11,17 +14,29 @@
 
 texture = ExtResource( 1 )
 
+[node name="grass 2" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
 [node name="forest" type="Sprite" parent="."]
 
 transform/pos = Vector2( 32.3534, -0.323532 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="forest 2" type="Sprite" parent="."]
 
-texture = ExtResource( 3 )
-
-[node name="grass 2" type="Sprite" parent="."]
-
 texture = ExtResource( 4 )
+
+[node name="forest 3" type="Sprite" parent="."]
+
+texture = ExtResource( 5 )
+
+[node name="forest 4" type="Sprite" parent="."]
+
+texture = ExtResource( 6 )
+
+[node name="forest 5" type="Sprite" parent="."]
+
+texture = ExtResource( 7 )
 
 

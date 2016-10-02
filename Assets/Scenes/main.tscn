@@ -72,6 +72,7 @@ scale = Vector2( 1, 1 )
 
 [node name="DevPanel" parent="CanvasLayer" instance=ExtResource( 6 )]
 
+editor/display_folded = true
 anchor/left = 1
 anchor/right = 1
 margin/left = 1024.0
@@ -208,6 +209,7 @@ columns = 4
 
 [node name="MapMode" type="Control" parent="CanvasLayer"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
