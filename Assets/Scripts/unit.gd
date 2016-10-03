@@ -5,6 +5,8 @@ export var select_color_unit = Color(0.1,1,0.1)
 var current_color_unit = diffuse_color_unit
 var select = false
 var to_pos = Vector2()
+var matrix_pos = Vector2()
+var global_pos = Vector2()
 var last_pos = Vector2()
 var unit_obj
 onready var unit_manager = get_parent()

@@ -10,10 +10,19 @@ var groups = 0
 var count_tags = 0
 
 
-func rotate(vector, rad = 2.0944):# 0.785398
-	var x = vector.x * cos(rad) - vector.y * sin(rad)
-	var y = vector.x * sin(rad) + vector.y * cos(rad)
-	return Vector2(x,y)
+#func getAngle(vector1, vector2):
+#	print('getAngle')
+#	var distY = abs(vector2.y - vector1.y) #opposite
+#	var distX = abs(vector2.x - vector1.x) #adjacent
+#	var dist = sqrt((distY * distY) + (distX * distX)) #hypotenuse
+#	var val = distY / dist
+#	var aSine = asin(val)
+#	return aSine #return angle in degrees
+
+#func rotate(vector, rad = 0):# 0.785398
+#	var x = vector.x * cos(rad) - vector.y * sin(rad)
+#	var y = vector.x * sin(rad) + vector.y * cos(rad)
+#	return Vector2(x,y)
 	
 class FillEntry:
 	var x
@@ -75,10 +84,15 @@ func PlaceUnits(unit_list, result=null):
 	var uf = result[1]
 	var pos = 0
 	count_tags += 1
+	
 	for Unit in unit_list:
 		#перемешает точки в позиции построения
-		Unit.to_pos = rotate(co[ uf[pos].x ][ uf[pos].y ])+camera.get_global_mouse_pos()
+		Unit.matrix_pos = co[ uf[pos].x ][ uf[pos].y ]
+		Unit.global_pos = camera.get_global_mouse_pos()
+		Unit.to_pos = (co[ uf[pos].x ][ uf[pos].y ]) + camera.get_global_mouse_pos()
+		#print(co[ uf[pos].x ][ uf[pos].y ], ' ',camera.get_global_mouse_pos())
 		pos += 1
+
 	
 	
 func _ready(): 
@@ -97,9 +111,14 @@ func _ready():
 	set_fixed_process(true)
 
 func _fixed_process(delta):
+	set_process_input(true)
 	if Input.is_action_just_pressed("RKM") and not unit_select_group.empty():
 		PlaceUnits (unit_select_group)
-			
+	
+	#var f = 0.785398
+	#for Unit in unit_select_group:
+	#	Unit.to_pos = Unit.matrix_pos.rotated(f) + Unit.global_pos
+	
 	if Input.is_action_just_pressed("Delete") and not unit_select_group.empty():
 		for unit in unit_select_group:
 			unit.free()
@@ -110,4 +129,4 @@ func add_unit(player_name, unit_name, unit_cord):
 	unit.unit_obj = unit.Unit.new(players.player_list[player_name], unit_name, unit_cord) 
 	unit.set_pos(unit.unit_obj.cord) 
 	add_child(unit)
-  
+

@@ -47,19 +47,15 @@ func clean_target_grid(target_army_grid, exception=[]):
 		if not(button_unit.get_name() in exception):
 			#free()
 			target_army_grid.remove_child(button_unit) #возможно тут еще надо делать free!!!
-			
-func _on_Button_pressed():
-	pass
-	
-#func _input_event(viewport, event, shape_idx):
-#	# Convert event to local coordinates
-#	if (event.type == InputEvent.MOUSE_MOTION):
-#		event = make_input_local(event)
-#		if control_scene.lock == false:
-#			control_scene.lock = true
 
-#func _mouse_exit():
-#	control_scene.lock = false
-#func _mouse_enter():
-#	control_scene.lock = true
-#	print ('1234567890')
+var f = 1
+	
+func _on_Button_pressed():
+	f-=1
+	for Unit in units_scene.unit_select_group:
+		Unit.to_pos = Unit.matrix_pos.rotated(f) + Unit.global_pos
+	
+func _on_Button1_pressed():
+	f+=1
+	for Unit in units_scene.unit_select_group:
+		Unit.to_pos = Unit.matrix_pos.rotated(f) + Unit.global_pos

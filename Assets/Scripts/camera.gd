@@ -56,7 +56,7 @@ func _input(event):
 		if event.is_pressed() and not event.is_echo():
 			if event.button_index == BUTTON_WHEEL_UP:
 				zoom_target -= zoom_step * (1/(1+zoom_target))
-                # zoom to mouse?
+               # zoom to mouse?
 			if event.button_index == BUTTON_WHEEL_DOWN:
 				zoom_target += zoom_step * (1/(1+zoom_target))
 	zoom_target = clamp(zoom_target, zoom_min, zoom_max)
