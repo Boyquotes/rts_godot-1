@@ -54,6 +54,7 @@ func _on_Button_pressed():
 	f-=10
 	for Unit in units_scene.unit_select_group:
 		Unit.to_pos = Unit.matrix_pos.rotated(deg2rad(f)) + Unit.global_pos
+		
 	
 func _on_Button1_pressed():
 	f+=10

@@ -10,6 +10,7 @@ var global_pos = Vector2()
 var last_pos = Vector2()
 var unit_obj
 onready var unit_manager = get_parent()
+var path_file_icon
 
 class Unit:
 	var ID
@@ -46,8 +47,13 @@ class Unit:
 		self.power_type = conf_uni["power_type"]
 		self.speed = conf_uni["speed"]
 		self.demoral = conf_uni["demoral"]
+		
 
 func _ready():
+	path_file_icon = "res://Assets/Textures/Units/" + unit_obj.unit_name + ".png"
+	if File.new().file_exists(path_file_icon) != true:
+		path_file_icon = "res://Assets/Textures/Units/default.png"
+	set_texture(load(path_file_icon))
 	add_to_group("player_army")
 	set_modulate(current_color_unit)
 	set_fixed_process(true)
@@ -60,6 +66,8 @@ func _fixed_process(delta):
 			var vec = (to_pos - get_global_pos()).normalized()
 			set_global_pos(get_global_pos() + vec * unit_obj.speed / 2)   
 			last_pos = get_global_pos()
+		set_rot(get_global_pos().angle_to_point(to_pos))
+		print(get_pos().angle_to_point(to_pos))
 
 func selecting(s, l):
 	var sx = false
