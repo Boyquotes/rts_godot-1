@@ -1,11 +1,11 @@
-extends Area2D
+extends Control
 
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
 export var font_color = Color(0,0,0)
-onready var units_scene = get_node("../world/units")
-onready var control_scene = get_node("../Control")
+onready var units_scene = get_node("../../world/units")
+onready var control_scene = get_node("../../Control")
 onready var target_army_grid = get_node("targetManager/ScrollContainer/VBoxContainer/GridContainer")
 
 func _ready():
@@ -51,12 +51,15 @@ func clean_target_grid(target_army_grid, exception=[]):
 func _on_Button_pressed():
 	pass
 	
-func _input_event(viewport, event, shape_idx):
-	# Convert event to local coordinates
-	if (event.type == InputEvent.MOUSE_MOTION):
-		event = make_input_local(event)
-		if control_scene.lock == false:
-			control_scene.lock = true
+#func _input_event(viewport, event, shape_idx):
+#	# Convert event to local coordinates
+#	if (event.type == InputEvent.MOUSE_MOTION):
+#		event = make_input_local(event)
+#		if control_scene.lock == false:
+#			control_scene.lock = true
 
-func _mouse_exit():
-	control_scene.lock = false
+#func _mouse_exit():
+#	control_scene.lock = false
+#func _mouse_enter():
+#	control_scene.lock = true
+#	print ('1234567890')

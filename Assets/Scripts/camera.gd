@@ -31,20 +31,20 @@ func move_towards(current, target, maxdelta):
 func _process(delta):
 	var cur_mouse_pos = get_viewport().get_mouse_pos()
     # mouse panning
-	if Input.is_mouse_button_pressed(BUTTON_MIDDLE) or (Input.is_mouse_button_pressed(BUTTON_LEFT) and Input.is_key_pressed(KEY_SHIFT)):
-		if last_mouse_pos != cur_mouse_pos:
-			offset = last_mouse_pos - cur_mouse_pos
-	else:
-		if (Input.is_action_pressed("ui_up")):
-			offset += Vector2 (0,-10)
-		if (Input.is_action_pressed("ui_down")):
-			offset += Vector2 (0,10)
-		if (Input.is_action_pressed("ui_left")):
-			offset += Vector2 (-10,0)
-		if (Input.is_action_pressed("ui_right")):
-			offset += Vector2 (10,0) 
-		translate(offset * get_zoom())
-		offset = Vector2()
+	#if Input.is_mouse_button_pressed(BUTTON_MIDDLE) or (Input.is_mouse_button_pressed(BUTTON_LEFT) and Input.is_key_pressed(KEY_SHIFT)):
+	#	if last_mouse_pos != cur_mouse_pos:
+	#		offset = last_mouse_pos - cur_mouse_pos
+	#else:
+	if (Input.is_action_pressed("ui_up")):
+		offset += Vector2 (0,-10)
+	if (Input.is_action_pressed("ui_down")):
+		offset += Vector2 (0,10)
+	if (Input.is_action_pressed("ui_left")):
+		offset += Vector2 (-10,0)
+	if (Input.is_action_pressed("ui_right")):
+		offset += Vector2 (10,0) 
+	translate(offset * get_zoom())
+	offset = Vector2()
 
 	var new_zoom = move_towards(get_zoom().x, zoom_target, zoom_speed * delta)
 		#(k0 - m) * current / target + m

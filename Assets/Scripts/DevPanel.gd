@@ -5,6 +5,7 @@ var current_unit = null
 onready var cam = get_node("../../Camera2D")
 onready var units_scene = get_node("../../world/units")
 onready var unit_panel = get_node("unit_manager/national_tabs")
+onready var label_mouse_pos = get_node('label_mouse_pos')
 var unit_list # конфигурация юнитов
 
 func _ready():
@@ -42,6 +43,7 @@ func _ready():
 	set_fixed_process(true)
 
 func _fixed_process(delta):
+	label_mouse_pos.set_text('X:' + str(get_viewport().get_mouse_pos().x) + ' Y:' + str(get_viewport().get_mouse_pos().y))
 	if Input.is_action_just_pressed("DT_unit_manager"):
 		if is_visible():
 			current_unit = null; hide()
