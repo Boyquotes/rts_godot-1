@@ -11,9 +11,6 @@ var count_tags = 0
 
 
 func rotate(vector, rad = 2.0944):# 0.785398
-	var angle = atan2(get_viewport().get_mouse_pos().y - vector.y, get_viewport().get_mouse_pos().y - vector.x )
-	angle = angle * (180/PI)
-	print (angle)
 	var x = vector.x * cos(rad) - vector.y * sin(rad)
 	var y = vector.x * sin(rad) + vector.y * cos(rad)
 	return Vector2(x,y)
