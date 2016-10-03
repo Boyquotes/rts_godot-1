@@ -51,11 +51,11 @@ func clean_target_grid(target_army_grid, exception=[]):
 var f = 1
 	
 func _on_Button_pressed():
-	f-=1
+	f-=10
 	for Unit in units_scene.unit_select_group:
-		Unit.to_pos = Unit.matrix_pos.rotated(f) + Unit.global_pos
+		Unit.to_pos = Unit.matrix_pos.rotated(deg2rad(f)) + Unit.global_pos
 	
 func _on_Button1_pressed():
-	f+=1
+	f+=10
 	for Unit in units_scene.unit_select_group:
-		Unit.to_pos = Unit.matrix_pos.rotated(f) + Unit.global_pos
+		Unit.to_pos = Unit.matrix_pos.rotated(deg2rad(f)) + Unit.global_pos

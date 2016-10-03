@@ -45,7 +45,7 @@ func fill_box(unit_list):
 		for y in range(0, k):
 			tmp.append(Vector2(distance * x, distance * y))
 			uf.append(FillEntry.new(x,y))
-			print (x,y)
+			#print (x,y)
 		co.append(tmp)
 	#print (co)
 	return [co, uf]
@@ -72,8 +72,8 @@ func box(unit_list):
 				else:
 					tmp.append(null)
 			co.append(tmp)
-		print (co)
-		print(uf)
+		#print (co)
+		#print(uf)
 		return [co, uf]
 
 func PlaceUnits(unit_list, result=null):
