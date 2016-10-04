@@ -85,11 +85,16 @@ func PlaceUnits(unit_list, result=null):
 	var pos = 0
 	count_tags += 1
 	
+	var angle = null
+	
 	for Unit in unit_list:
 		#перемешает точки в позиции построения
-		Unit.matrix_pos = co[ uf[pos].x ][ uf[pos].y ]
-		Unit.global_pos = camera.get_global_mouse_pos()
-		Unit.to_pos = (co[ uf[pos].x ][ uf[pos].y ]) + camera.get_global_mouse_pos()
+		Unit.matrix_pos = co[ uf[pos].x ][ uf[pos].y ]  
+		Unit.global_pos = camera.get_global_mouse_pos() 
+		if angle == null:
+			angle = Unit.get_pos().angle_to_point(camera.get_global_mouse_pos())
+		Unit.to_pos = Unit.matrix_pos.rotated(angle)+ Unit.global_pos
+		Unit.angle = angle
 		#print(co[ uf[pos].x ][ uf[pos].y ], ' ',camera.get_global_mouse_pos())
 		pos += 1
 
@@ -121,7 +126,7 @@ func _fixed_process(delta):
 	
 	if Input.is_action_just_pressed("Delete") and not unit_select_group.empty():
 		for unit in unit_select_group:
-			unit.free()
+			unit.dead() 
 		unit_select_group = [] 
 
 func add_unit(player_name, unit_name, unit_cord):

@@ -82,12 +82,13 @@ class Map:
 		DEFAULT_GRASS = n
 	
 	func render(tilemaps):
+		randomize()
 		for tilemap in tilemaps:
 			for x in range(0, map.size()):
 				for y in range(0, map[0].size()):
 					if tilemap.get_name() != 'TileMap_terra':
 						if not(map[x][y] in [ID_GRASS, ID_GRASS2]):
-							tilemap.set_cell(x, y, map[x][y])
+							tilemap.set_cell(x, y, map[x][y],randi()%2,randi()%2,randi()%2) 
 					else:
 						tilemap.set_cell(x, y, DEFAULT_GRASS)
 	func prn():

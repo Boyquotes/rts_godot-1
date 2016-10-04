@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://Assets/Scripts/players.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Scripts/control.gd" type="Script" id=2]
@@ -9,11 +9,9 @@
 [ext_resource path="res://Assets/Scripts/mapManager.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Scripts/targetManager.gd" type="Script" id=9]
-[ext_resource path="res://Assets/Textures/Panels/scroll.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Themes/in_game.tres" type="Theme" id=10]
 [ext_resource path="res://Assets/Textures/Control/box.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Textures/Control/fillbox.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Textures/Control/rotate_minus.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Textures/Control/rotate_plus.png" type="Texture" id=14]
 
 [node name="main" type="Node2D"]
 
@@ -74,7 +72,6 @@ scale = Vector2( 1, 1 )
 
 [node name="DevPanel" parent="CanvasLayer" instance=ExtResource( 6 )]
 
-visibility/visible = true
 anchor/left = 1
 anchor/right = 1
 margin/left = 1024.0
@@ -138,7 +135,7 @@ margin/bottom = 560.0
 script/script = ExtResource( 9 )
 font_color = Color( 0, 0, 0, 1 )
 
-[node name="targetManager" type="TextureFrame" parent="CanvasLayer/TargetPanel"]
+[node name="targetManager" type="Panel" parent="CanvasLayer/TargetPanel"]
 
 anchor/top = 1
 anchor/bottom = 1
@@ -146,13 +143,11 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
+theme/theme = ExtResource( 10 )
 margin/left = 1.0
-margin/top = -354.0
-margin/right = 501.0
-margin/bottom = -551.0
-texture = ExtResource( 10 )
-expand = true
-stretch_mode = 0
+margin/top = -396.0
+margin/right = 410.0
+margin/bottom = -560.0
 
 [node name="GridContainer1" type="GridContainer" parent="CanvasLayer/TargetPanel/targetManager"]
 
@@ -160,10 +155,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 322.0
-margin/top = 30.0
-margin/right = 423.0
-margin/bottom = 116.0
+margin/left = 282.0
+margin/top = 24.0
+margin/right = 383.0
+margin/bottom = 110.0
 columns = 4
 
 [node name="Button" type="Button" parent="CanvasLayer/TargetPanel/targetManager/GridContainer1"]
@@ -174,13 +169,13 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 44.0
-margin/bottom = 38.0
+margin/right = 48.0
+margin/bottom = 48.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 icon = ExtResource( 11 )
-flat = true
+flat = false
 
 [node name="Button1" type="Button" parent="CanvasLayer/TargetPanel/targetManager/GridContainer1"]
 
@@ -188,71 +183,26 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 48.0
+margin/left = 52.0
 margin/top = 0.0
-margin/right = 92.0
-margin/bottom = 38.0
+margin/right = 100.0
+margin/bottom = 48.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 icon = ExtResource( 12 )
-flat = true
-
-[node name="GridContainer2" type="GridContainer" parent="CanvasLayer/TargetPanel/targetManager"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 322.0
-margin/top = 123.0
-margin/right = 424.0
-margin/bottom = 163.0
-columns = 4
-
-[node name="Button" type="Button" parent="CanvasLayer/TargetPanel/targetManager/GridContainer2"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 44.0
-margin/bottom = 38.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-icon = ExtResource( 13 )
-flat = true
-
-[node name="Button1" type="Button" parent="CanvasLayer/TargetPanel/targetManager/GridContainer2"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 48.0
-margin/top = 0.0
-margin/right = 92.0
-margin/bottom = 38.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-icon = ExtResource( 14 )
-flat = true
+flat = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TargetPanel/targetManager"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 65.0
-margin/top = 30.0
-margin/right = 316.0
-margin/bottom = 149.0
+margin/left = 25.0
+margin/top = 24.0
+margin/right = 276.0
+margin/bottom = 143.0
 scroll/horizontal = false
 scroll/vertical = false
 
@@ -278,7 +228,10 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 37.0
 margin/bottom = 14.0
-custom_colors/font_color = Color( 0.464844, 0, 0, 1 )
+custom_colors/font_color = Color( 0.554688, 0.149506, 0.149506, 1 )
+custom_colors/font_color_shadow = Color( 0.933333, 0.764706, 0.603922, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
 text = "INFO:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -298,10 +251,5 @@ columns = 4
 
 [connection signal="pressed" from="CanvasLayer/MapMode/bt_ch_background_map" to="CanvasLayer/MapMode" method="_on_bt_ch_background_map_pressed"]
 
-[connection signal="pressed" from="CanvasLayer/TargetPanel/targetManager/GridContainer2/Button" to="CanvasLayer/TargetPanel" method="_on_Button_pressed"]
-
-[connection signal="pressed" from="CanvasLayer/TargetPanel/targetManager/GridContainer2/Button1" to="CanvasLayer/TargetPanel" method="_on_Button1_pressed"]
-
 
 [editable path="world"]
-[editable path="CanvasLayer/DevPanel"]

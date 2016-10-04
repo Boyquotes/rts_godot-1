@@ -11,6 +11,7 @@ var last_pos = Vector2()
 var unit_obj
 onready var unit_manager = get_parent()
 var path_file_icon
+var angle = null
 
 class Unit:
 	var ID
@@ -67,7 +68,12 @@ func _fixed_process(delta):
 			set_global_pos(get_global_pos() + vec * unit_obj.speed / 2)   
 			last_pos = get_global_pos()
 		set_rot(get_global_pos().angle_to_point(to_pos))
-		print(get_pos().angle_to_point(to_pos))
+		update()
+	else:
+		if (get_rot() != angle and angle != null):
+			set_rot(angle)  
+			angle = null 
+	
 
 func selecting(s, l):
 	var sx = false
@@ -108,3 +114,11 @@ func selecting(s, l):
 		select = false 
 		unit_manager.unit_select_group.erase(self)
 	set_modulate(current_color_unit)
+
+func dead():
+	randomize()
+	remove_from_group("player_army")
+	last_pos = to_pos
+	get_node("anim").play("dead")
+	get_node("sound").set_default_pitch_scale(1.05-((randi()%10)*0.01))
+	get_node("sound").play("dead_000"+str((randi()%3) +1))
