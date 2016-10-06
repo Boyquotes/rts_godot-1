@@ -24,8 +24,8 @@ class RndCoord:
 			y = -y
 		if _z == 2:
 			y = -y
-		if _z == 3:
-			x = -x
+		#if _z == 3:
+		#	x = -x
 
 class Map:
 	var map = []
@@ -52,28 +52,29 @@ class Map:
 		randomize() #need add fat len
 		for count_struct in range(0, count_struct_max):
 			var rnd_coord = RndCoord.new(size_x, size_y)
-			var x = rnd_coord.x
-			var y = rnd_coord.y
+			var x = abs(rnd_coord.x)
+			var y = abs(rnd_coord.y)
 			var dir = 0
 			var tile
 			var count_obj = 0
 			if type_rnd == 'struct':
 				tile = tiles[randi() % tiles.size()]
 			while count_obj != count_obj_max:
-				dir = randi() % 4
-				if dir == 0:
+				dir = randi() % 4				
+				if dir == 0  and x + 1 <= size_x:
 					x += 1
-				if dir == 1:
+				if dir == 1  and x - 1 <= 0:
 					x += -1
-				if dir == 2:
+				if dir == 2 and y + 1 <= size_y:
 					y += 1
-				if dir == 3:
+				if dir == 3 and y - 1 >= 0:
 					y += -1
 				if type_rnd == 'full':
 					tile = tiles[randi() % tiles.size()]
-				if size_x > abs(x) and size_y > abs(y):
+				if size_x-1 > abs(x) and size_y-1 > abs(y):
+					print (y)
 					map[x][y] = tile
-					count_obj += 1
+				count_obj += 1
 	
 	func gen_forest(size_x, size_y, count_forest, count_tree):
 		gen_rnd_struct(size_x, size_y, count_forest, count_tree, [ID_FOREST, ID_FOREST2, ID_FOREST3, ID_FOREST4, ID_FOREST5])
@@ -88,7 +89,7 @@ class Map:
 				for y in range(0, map[0].size()):
 					if tilemap.get_name() != 'TileMap_terra':
 						if not(map[x][y] in [ID_GRASS, ID_GRASS2]):
-							tilemap.set_cell(x, y, map[x][y],randi()%2,randi()%2,randi()%2) 
+							tilemap.set_cell(x, y, map[x][y]) #randi()%2,randi()%2,randi()%2
 					else:
 						tilemap.set_cell(x, y, DEFAULT_GRASS)
 	func prn():
