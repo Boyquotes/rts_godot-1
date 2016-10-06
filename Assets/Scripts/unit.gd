@@ -114,6 +114,13 @@ func selecting(s, l):
 		unit_manager.unit_select_group.erase(self)
 	set_modulate(current_color_unit)
 
+func unselect():
+	current_color_unit = diffuse_color_unit
+	set_modulate(current_color_unit)
+	select = false
+	update()
+	unit_manager.unit_select_group = []
+
 func dead():
 	randomize()
 	remove_from_group("player_army")

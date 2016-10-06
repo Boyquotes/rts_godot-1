@@ -3,24 +3,29 @@ extends Node2D
 onready var cam = get_node("../Camera2D")
 onready var dev_panel = get_node("../CanvasLayer/DevPanel")
 onready var target_manager = get_node("../CanvasLayer/TargetPanel/targetManager")
+onready var units_scene = get_node("../world/units")
 export var select_color = Color(0,1,0,0.1)
 export var select_color_border = Color(0,1,0)
 var start_point = Vector2()
 var last_point = Vector2()
 var minimap_move = false
-var selected = false
+
 
 func controller_select():
 	if Input.is_action_just_pressed("LKM"):
 		#get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
-		start_point = cam.get_global_mouse_pos()
+		for unit in units_scene.unit_select_group:
+			unit.unselect()
+		if minimap_move == false:
+			start_point = cam.get_global_mouse_pos()
 	if Input.is_action_pressed("LKM"):
 		if minimap_move == false:
-			selected = true
+
 			last_point = cam.get_global_mouse_pos()
 			update()
 	elif Input.is_action_just_released("LKM"):
-		get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
+		if minimap_move == false:
+			get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
 		start_point = Vector2()
 		last_point = Vector2()
 		update() 

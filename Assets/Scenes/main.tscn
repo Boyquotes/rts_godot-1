@@ -278,6 +278,7 @@ script/script = ExtResource( 13 )
 
 [node name="WindowDialog" type="WindowDialog" parent="CanvasLayer/minimap"]
 
+visibility/visible = false
 anchor/top = 3
 anchor/bottom = 3
 focus/ignore_mouse = false

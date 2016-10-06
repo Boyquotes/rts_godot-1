@@ -72,7 +72,6 @@ class Map:
 				if type_rnd == 'full':
 					tile = tiles[randi() % tiles.size()]
 				if size_x-1 > abs(x) and size_y-1 > abs(y):
-					print (y)
 					map[x][y] = tile
 				count_obj += 1
 	

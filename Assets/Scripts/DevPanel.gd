@@ -18,6 +18,7 @@ func TEST_gen_10000():
 		count += 1
 		
 func _ready():
+	TEST_gen_10000()
 	unit_list = load("res://Assets/Configs/unit_list.gd").new().units
 	for national in unit_list.keys():
 		#создание раздела национальности

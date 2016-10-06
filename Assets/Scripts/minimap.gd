@@ -4,6 +4,7 @@ onready var terra = get_node('../../world')
 onready var tf = get_node('WindowDialog/TextureFrame')
 var imagetexture = ImageTexture.new()
 onready var control_scene = get_node("../../Control")
+onready var units_scene = get_node("../../world/units")
 
 func _ready():
 	var colors = {1:Color(0,100,0), 0:Color(0, 1, 0), 2:Color(0,100,0),3:Color(0,1,0),4:Color(0,100,0),5:Color(0,100,0),6:Color(0,100,0)}
