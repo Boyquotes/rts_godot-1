@@ -52,11 +52,7 @@ func init(player, unit_name, cord):
 	
 
 func _ready():
-	#path_file_icon = "res://Assets/Textures/Units/" + unit_name + ".png"
-	#if File.new().file_exists(path_file_icon) != true:
-	#	path_file_icon = "res://Assets/Textures/Units/default.png"
-	#set_texture(load(path_file_icon))
-	set_texture(unit_manager.unit_images)
+	set_texture(unit_manager.unit_images[unit_name])
 	add_to_group("player_army")
 	set_modulate(current_color_unit)
 	set_process(true)

@@ -8,7 +8,9 @@ var unit_select_group = []
 var distance = 10
 var groups = 0
 var count_tags = 0
-var unit_images = load('res://Assets/Textures/Units/default.png')
+
+var unit_images = {}
+var unit_conf = load("res://Assets/Configs/unit_list.gd").new()
 
 func list_files_in_directory(path):
 	var files = []
@@ -23,13 +25,6 @@ func list_files_in_directory(path):
 			files.append(file)
 	dir.list_dir_end()
 	return files
-	
-class FillEntry:
-	var x
-	var y
-	func _init(X, Y):
-		x = X
-		y = Y
 
 func fill_box(unit_list):
 	groups += 1
@@ -44,7 +39,7 @@ func fill_box(unit_list):
 		var tmp = []
 		for y in range(0, k):
 			tmp.append(Vector2(distance * x, distance * y))
-			uf.append(FillEntry.new(x,y))
+			uf.append(Vector2(x,y))
 			#print (x,y)
 		co.append(tmp)
 	#print (co)
@@ -69,7 +64,7 @@ func box(unit_list):
 			for y in range(0, l):
 				if x == 0 or y == 0 or x == l-1 or y == l-1:
 					tmp.append(Vector2(distance * x, distance * y))
-					uf.append(FillEntry.new(x,y))	
+					uf.append(Vector2(x,y))	
 				else:
 					tmp.append(null)
 			co.append(tmp)
@@ -102,6 +97,14 @@ func PlaceUnits(unit_list, result=null):
 	
 	
 func _ready(): 
+	for national in unit_conf.units.keys(): 
+		for type in unit_conf.units[national]:
+			for name in unit_conf.units[national][type]:
+				var path_file_icon = "res://Assets/Textures/Units/" + name + ".png"
+				if File.new().file_exists(path_file_icon) != true:
+					unit_images[name] = load('res://Assets/Textures/Units/default.png')
+				else:
+					unit_images[name] = load('res://Assets/Textures/Units/' + name + '.png')
 	set_fixed_process(true)
 
 func _fixed_process(delta):
