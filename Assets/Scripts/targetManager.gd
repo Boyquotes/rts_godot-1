@@ -19,10 +19,10 @@ func _process(delta):
 		if i == 0:
 			var unit_count = {}
 			for unit in units_scene.unit_select_group:
-				if unit_count.has(unit.unit_obj.unit_name):
-					unit_count[unit.unit_obj.unit_name] += 1
+				if unit_count.has(unit.unit_name):
+					unit_count[unit.unit_name] += 1
 				else:
-					unit_count[unit.unit_obj.unit_name] = 1
+					unit_count[unit.unit_name] = 1
 			for name in unit_count:
 				var button = Button.new()
 				button.set_name(name)

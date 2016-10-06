@@ -8,21 +8,21 @@ var unit_select_group = []
 var distance = 10
 var groups = 0
 var count_tags = 0
+var unit_images = load('res://Assets/Textures/Units/default.png')
 
-
-#func getAngle(vector1, vector2):
-#	print('getAngle')
-#	var distY = abs(vector2.y - vector1.y) #opposite
-#	var distX = abs(vector2.x - vector1.x) #adjacent
-#	var dist = sqrt((distY * distY) + (distX * distX)) #hypotenuse
-#	var val = distY / dist
-#	var aSine = asin(val)
-#	return aSine #return angle in degrees
-
-#func rotate(vector, rad = 0):# 0.785398
-#	var x = vector.x * cos(rad) - vector.y * sin(rad)
-#	var y = vector.x * sin(rad) + vector.y * cos(rad)
-#	return Vector2(x,y)
+func list_files_in_directory(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+	dir.list_dir_end()
+	return files
 	
 class FillEntry:
 	var x
@@ -48,6 +48,7 @@ func fill_box(unit_list):
 			#print (x,y)
 		co.append(tmp)
 	#print (co)
+	print ('matrix_ok')
 	return [co, uf]
 
 func box(unit_list):
@@ -101,22 +102,10 @@ func PlaceUnits(unit_list, result=null):
 	
 	
 func _ready(): 
-#	add_unit("Timofffee", "spearman", Vector2(2,20))
-#	add_unit("Timofffee", "spearman", Vector2(30,20))
-#	add_unit("Timofffee", "spearman", Vector2(40,30))
-#	add_unit("Timofffee", "spearman", Vector2(50,30))
-#	add_unit("Timofffee", "spearman", Vector2(60,10))
-#	add_unit("Timofffee", "spearman", Vector2(70,50))
-#	add_unit("Timofffee", "spearman", Vector2(80,60))
-#	add_unit("Timofffee", "spearman", Vector2(90,10))
-#	add_unit("Timofffee", "spearman", Vector2(55,5))
-#	add_unit("Timofffee", "spearman", Vector2(25,10))
-#	add_unit("Timofffee", "spearman", Vector2(15,20))
-#	add_unit("Timofffee", "spearman", Vector2(10,5))
 	set_fixed_process(true)
 
 func _fixed_process(delta):
-	set_process_input(true)
+	#set_process_input(true)
 	if Input.is_action_just_pressed("RKM") and not unit_select_group.empty():
 		PlaceUnits (unit_select_group)
 	
@@ -131,7 +120,23 @@ func _fixed_process(delta):
 
 func add_unit(player_name, unit_name, unit_cord):
 	unit = unit_scene.instance()
-	unit.unit_obj = unit.Unit.new(players.player_list[player_name], unit_name, unit_cord) 
-	unit.set_pos(unit.unit_obj.cord) 
+	#unit.unit_obj = unit.init(players.player_list[player_name], unit_name, unit_cord) 
+	unit.init(players.player_list[player_name], unit_name, unit_cord) 
+	unit.set_pos(unit.cord) 
 	add_child(unit)
+	
+	
+#func getAngle(vector1, vector2):
+#	print('getAngle')
+#	var distY = abs(vector2.y - vector1.y) #opposite
+#	var distX = abs(vector2.x - vector1.x) #adjacent
+#	var dist = sqrt((distY * distY) + (distX * distX)) #hypotenuse
+#	var val = distY / dist
+#	var aSine = asin(val)
+#	return aSine #return angle in degrees
+
+#func rotate(vector, rad = 0):# 0.785398
+#	var x = vector.x * cos(rad) - vector.y * sin(rad)
+#	var y = vector.x * sin(rad) + vector.y * cos(rad)
+#	return Vector2(x,y)
 

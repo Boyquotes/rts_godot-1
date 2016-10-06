@@ -8,72 +8,75 @@ var to_pos = Vector2()
 var matrix_pos = Vector2()
 var global_pos = Vector2()
 var last_pos = Vector2()
-var unit_obj
+#var unit_obj
 onready var unit_manager = get_parent()
+
 var path_file_icon
 var angle = null
 
-class Unit:
-	var ID
-	var type = null   #	var type = "solider"
-	var unit_name
-	var health        #	var health = 12
-	var morale        #	var morale = 8
-	var power        #	var strange = 14
-	var power_speed 
-	var power_type  #	var strange_type = 1
-	var national      #	var national = "poland"
-	var speed         #	var speed = 4
-	var demoral       #var demoral = 1
-	var cord
-	var type_form = null
-	var tag = null
-	func _init(player, unit_name, cord):
-		var unit_conf = load ("res://Assets/Configs/unit_list.gd").new()
-		self.ID = player["ID"]
-		self.unit_name = unit_name
-		self.national = player["national"]
-		for tk in unit_conf.units[self.national].keys():
-			for tkk in unit_conf.units[self.national][tk].keys():
-				if tkk == unit_name:
-					self.type = tk
-					break
-			if (self.type != null): break
-		self.cord = cord
-		var conf_uni = unit_conf.units[self.national][self.type][self.unit_name]
-		self.health = conf_uni["health"]
-		self.morale = conf_uni["morale"]
-		self.power = conf_uni["power"]
-		self.power_speed = conf_uni["power_speed"]
-		self.power_type = conf_uni["power_type"]
-		self.speed = conf_uni["speed"]
-		self.demoral = conf_uni["demoral"]
-		
+var ID
+var type = null   #	var type = "solider"
+var unit_name
+var health        #	var health = 12
+var morale        #	var morale = 8
+var power        #	var strange = 14
+var power_speed 
+var power_type  #	var strange_type = 1
+var national      #	var national = "poland"
+var speed         #	var speed = 4
+var demoral       #var demoral = 1
+var cord
+var type_form = null
+var tag = null
+
+func init(player, unit_name, cord):
+	var unit_conf = load("res://Assets/Configs/unit_list.gd").new()
+	self.ID = player["ID"]
+	self.unit_name = unit_name
+	self.national = player["national"]
+	for tk in unit_conf.units[self.national].keys():
+		for tkk in unit_conf.units[self.national][tk].keys():
+			if tkk == unit_name:
+				self.type = tk
+				break
+		if (self.type != null): break
+	self.cord = cord
+	var conf_uni = unit_conf.units[self.national][self.type][self.unit_name]
+	self.health = conf_uni["health"]
+	self.morale = conf_uni["morale"]
+	self.power = conf_uni["power"]
+	self.power_speed = conf_uni["power_speed"]
+	self.power_type = conf_uni["power_type"]
+	self.speed = conf_uni["speed"]
+	self.demoral = conf_uni["demoral"]
+	
 
 func _ready():
-	path_file_icon = "res://Assets/Textures/Units/" + unit_obj.unit_name + ".png"
-	if File.new().file_exists(path_file_icon) != true:
-		path_file_icon = "res://Assets/Textures/Units/default.png"
-	set_texture(load(path_file_icon))
+	#path_file_icon = "res://Assets/Textures/Units/" + unit_name + ".png"
+	#if File.new().file_exists(path_file_icon) != true:
+	#	path_file_icon = "res://Assets/Textures/Units/default.png"
+	#set_texture(load(path_file_icon))
+	set_texture(unit_manager.unit_images)
 	add_to_group("player_army")
 	set_modulate(current_color_unit)
-	set_fixed_process(true)
+	set_process(true)
+	
 
-func _fixed_process(delta):
+func _process(delta):
 	if to_pos != last_pos:
-		if to_pos.distance_to(last_pos) < 1.0:
+		if to_pos.distance_to(last_pos) < 1:
 			last_pos = to_pos
 		else:
 			var vec = (to_pos - get_global_pos()).normalized()
-			set_global_pos(get_global_pos() + vec * unit_obj.speed / 2)   
+			set_global_pos(get_global_pos() + vec * speed / 2)   
 			last_pos = get_global_pos()
 		set_rot(get_global_pos().angle_to_point(to_pos))
-		update()
+		#update()
 	else:
 		if (get_rot() != angle and angle != null):
 			set_rot(angle)  
 			angle = null 
-	
+
 
 func selecting(s, l):
 	var sx = false

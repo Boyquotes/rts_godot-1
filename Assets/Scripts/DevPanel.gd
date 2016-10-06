@@ -8,6 +8,15 @@ onready var unit_panel = get_node("unit_manager/national_tabs")
 onready var label_mouse_pos = get_node('label_mouse_pos')
 var unit_list # конфигурация юнитов
 
+func TEST_gen_10000():
+	var count = 0
+	while count <= 100:
+		var line = 0
+		while line <= 100:
+			units_scene.add_unit("Timofffee", "elear", Vector2(count,line))
+			line += 1
+		count += 1
+		
 func _ready():
 	unit_list = load("res://Assets/Configs/unit_list.gd").new().units
 	for national in unit_list.keys():
