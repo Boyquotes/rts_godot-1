@@ -285,9 +285,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 20.0
+margin/top = 22.0
 margin/right = 152.0
-margin/bottom = -117.0
+margin/bottom = -115.0
 popup/exclusive = false
 window/title = "MAP"
 
@@ -306,6 +306,10 @@ expand = true
 stretch_mode = 0
 
 [connection signal="pressed" from="CanvasLayer/MapMode/bt_ch_background_map" to="CanvasLayer/MapMode" method="_on_bt_ch_background_map_pressed"]
+
+[connection signal="mouse_enter" from="CanvasLayer/minimap/WindowDialog" to="CanvasLayer/minimap" method="_on_WindowDialog_mouse_enter"]
+
+[connection signal="mouse_exit" from="CanvasLayer/minimap/WindowDialog" to="CanvasLayer/minimap" method="_on_WindowDialog_mouse_exit"]
 
 
 [editable path="world"]

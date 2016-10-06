@@ -3,6 +3,7 @@ extends Control
 onready var terra = get_node('../../world')
 onready var tf = get_node('WindowDialog/TextureFrame')
 var imagetexture = ImageTexture.new()
+onready var control_scene = get_node("../../Control")
 
 func _ready():
 	var colors = {1:Color(0,100,0), 0:Color(0, 1, 0), 2:Color(0,100,0),3:Color(0,1,0),4:Color(0,100,0),5:Color(0,100,0),6:Color(0,100,0)}
@@ -19,3 +20,10 @@ func _ready():
 
 	tf.set_texture(imagetexture)
 	get_node('WindowDialog').show()
+
+func _on_WindowDialog_mouse_enter():
+	control_scene.minimap_move = true
+
+
+func _on_WindowDialog_mouse_exit():
+	control_scene.minimap_move = false

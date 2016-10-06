@@ -7,6 +7,7 @@ export var select_color = Color(0,1,0,0.1)
 export var select_color_border = Color(0,1,0)
 var start_point = Vector2()
 var last_point = Vector2()
+var minimap_move = false
 
 func controller_select():
 
@@ -23,13 +24,14 @@ func controller_select():
 		update() 
 
 func _process(delta):
-	if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible())):
-		if ((target_manager.is_visible()) and
-		    ((get_viewport().get_mouse_pos().y < target_manager.get_pos().y) or 
-			(get_viewport().get_mouse_pos().x > (target_manager.get_pos().x + target_manager.get_size().x)))):	
-			controller_select()
-		elif not(target_manager.is_visible()):
-			controller_select()
+	if minimap_move == false:
+		if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible())):
+			if ((target_manager.is_visible()) and
+			    ((get_viewport().get_mouse_pos().y < target_manager.get_pos().y) or 
+				(get_viewport().get_mouse_pos().x > (target_manager.get_pos().x + target_manager.get_size().x)))):	
+				controller_select()
+			elif not(target_manager.is_visible()):
+				controller_select()
 
 
 
