@@ -23,9 +23,9 @@ func _ready():
 
 func _on_WindowDialog_mouse_enter():
 	control_scene.minimap_move = true
-	control_scene.start_point = Vector2()
-	control_scene.last_point = Vector2()
-	control_scene.update()
+	#control_scene.start_point = Vector2()
+	#control_scene.last_point = Vector2()
+	#control_scene.update()
 	
 
 func _on_WindowDialog_mouse_exit():

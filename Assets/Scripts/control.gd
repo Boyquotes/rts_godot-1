@@ -15,9 +15,10 @@ func controller_select():
 		#get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
 		start_point = cam.get_global_mouse_pos()
 	if Input.is_action_pressed("LKM"):
-		selected = true
-		last_point = cam.get_global_mouse_pos()
-		update()
+		if minimap_move == false:
+			selected = true
+			last_point = cam.get_global_mouse_pos()
+			update()
 	elif Input.is_action_just_released("LKM"):
 		get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
 		start_point = Vector2()
@@ -25,14 +26,14 @@ func controller_select():
 		update() 
 
 func _process(delta):
-	if minimap_move == false:
-		if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible())):
-			if ((target_manager.is_visible()) and
-			    ((get_viewport().get_mouse_pos().y < target_manager.get_pos().y) or 
-				(get_viewport().get_mouse_pos().x > (target_manager.get_pos().x + target_manager.get_size().x)))):	
-				controller_select()
-			elif not(target_manager.is_visible()):
-				controller_select()
+
+	if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible())):
+		if ((target_manager.is_visible()) and
+			((get_viewport().get_mouse_pos().y < target_manager.get_pos().y) or 
+			(get_viewport().get_mouse_pos().x > (target_manager.get_pos().x + target_manager.get_size().x)))):	
+			controller_select()
+		elif not(target_manager.is_visible()):
+			controller_select()
 
 
 
