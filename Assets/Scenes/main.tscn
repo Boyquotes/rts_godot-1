@@ -306,11 +306,20 @@ margin/bottom = 135.0
 expand = true
 stretch_mode = 0
 
+[node name="minimap_refresh" type="Timer" parent="CanvasLayer/minimap"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = true
+
 [connection signal="pressed" from="CanvasLayer/MapMode/bt_ch_background_map" to="CanvasLayer/MapMode" method="_on_bt_ch_background_map_pressed"]
 
 [connection signal="mouse_enter" from="CanvasLayer/minimap/WindowDialog" to="CanvasLayer/minimap" method="_on_WindowDialog_mouse_enter"]
 
 [connection signal="mouse_exit" from="CanvasLayer/minimap/WindowDialog" to="CanvasLayer/minimap" method="_on_WindowDialog_mouse_exit"]
+
+[connection signal="timeout" from="CanvasLayer/minimap/minimap_refresh" to="CanvasLayer/minimap" method="_on_minimap_refresh_timeout"]
 
 
 [editable path="world"]

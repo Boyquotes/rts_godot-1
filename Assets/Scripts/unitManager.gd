@@ -8,6 +8,7 @@ var unit_select_group = []
 var distance = 10
 var groups = 0
 var count_tags = 0
+onready var minimap = get_node("../../CanvasLayer/minimap")
 
 var unit_images = {}
 var unit_conf = load("res://Assets/Configs/unit_list.gd").new()
@@ -106,6 +107,11 @@ func _ready():
 				else:
 					unit_images[name] = load('res://Assets/Textures/Units/' + name + '.png')
 	set_fixed_process(true)
+
+#	set_process(true)
+	
+#func _process(delta):
+#	minimap.refresh_minimap('unit')
 
 func _fixed_process(delta):
 	#set_process_input(true)
