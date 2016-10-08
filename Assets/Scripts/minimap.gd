@@ -2,6 +2,8 @@ extends Control
 
 #onready var upd_timer_minimap = get_node('minimap_refresh')
 onready var terra = get_node('../../world')
+onready var camer = get_node('../../Camera')
+
 onready var grass = get_node('../../world/TileMap_terra')
 onready var tf = get_node('WindowDialog/TextureFrame')
 var imagetexture = ImageTexture.new()
@@ -33,7 +35,7 @@ func gen_minimap_units(minimap_img):
 		minimap_img.put_pixel(c.x, c.y, unit.diffuse_color_unit)
 	return minimap_img
 
-func _ready():	
+func _ready():		
 	minimap_img = Image(terra.size_x, terra.size_y, false, 3)
 	minimap_img = gen_minimap_terra(minimap_img)
 	minimap_img_default = minimap_img
@@ -54,6 +56,8 @@ func _on_WindowDialog_mouse_exit():
 
 
 func _on_minimap_refresh_timeout():
+	#var rtt = get_viewport().get_render_target_texture()
+	#tf.set_texture(rtt)
 	minimap_img = gen_minimap_units(minimap_img_default)
 	imagetexture.create_from_image(minimap_img)
 	imagetexture.set_flags(3)

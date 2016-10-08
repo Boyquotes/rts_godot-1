@@ -7,6 +7,7 @@ var select = false
 var to_pos = Vector2()
 var matrix_pos = Vector2()
 var global_pos = Vector2()
+var vec = Vector2()
 var last_pos = Vector2()
 #var unit_obj
 onready var unit_manager = get_parent()
@@ -64,12 +65,13 @@ func _process(delta):
 		if to_pos.distance_to(last_pos) < 1:
 			last_pos = to_pos
 		else:
-			var vec = (to_pos - get_global_pos()).normalized()
-			set_global_pos(get_global_pos() + vec * speed / 2)   
+			#vec = ((Unit.to_pos - Unit.get_global_pos()).normalized()) * Unit.speed / 2
+			#set_global_pos(get_global_pos() + vec * speed / 2)   
+			translate(vec)
 			last_pos = get_global_pos()
 		set_rot(get_global_pos().angle_to_point(to_pos))
 
-		#update()
+#		#update()
 	else:
 		if (get_rot() != angle and angle != null):
 			set_rot(angle)  
