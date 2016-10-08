@@ -173,7 +173,7 @@ font_color = Color( 0, 0, 0, 1 )
 
 anchor/top = 1
 anchor/bottom = 1
-focus/ignore_mouse = true
+focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
