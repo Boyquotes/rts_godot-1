@@ -7,9 +7,9 @@
 [ext_resource path="res://Assets/Scripts/unitManager.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Scenes/DevPanel.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Scripts/mapManager.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Themes/in_game.tres" type="Theme" id=8]
-[ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Scripts/targetManager.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Scripts/targetManager.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Themes/in_game.tres" type="Theme" id=10]
 [ext_resource path="res://Assets/Textures/Control/box.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Textures/Control/fillbox.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Scripts/minimap.gd" type="Script" id=13]
@@ -17,27 +17,6 @@
 [node name="main" type="Node2D"]
 
 transform/pos = Vector2( 1, 0 )
-
-[node name="Camera" type="Camera2D" parent="."]
-
-transform/pos = Vector2( 501, 288 )
-anchor_mode = 1
-rotating = false
-current = false
-zoom = Vector2( 10, 10 )
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-limit/smoothed = false
-drag_margin/h_enabled = true
-drag_margin/v_enabled = true
-smoothing/enable = false
-smoothing/speed = 5.0
-drag_margin/left = 0.2
-drag_margin/top = 0.2
-drag_margin/right = 0.2
-drag_margin/bottom = 0.2
 
 [node name="Players" type="Node" parent="."]
 
@@ -78,6 +57,10 @@ zoom_speed = 2.0
 [node name="world" parent="." instance=ExtResource( 4 )]
 
 z/z = -1
+size_x = 200
+size_y = 200
+count_forest = 10
+count_tree = 100
 
 [node name="TileMap_forest" parent="world"]
 
@@ -142,17 +125,15 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = ExtResource( 8 )
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 48.0
-margin/bottom = 48.0
+margin/left = 1.0
+margin/top = 1.0
+margin/right = 45.0
+margin/bottom = 39.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-icon = ExtResource( 9 )
+icon = ExtResource( 8 )
 flat = false
-clip_text = true
 
 [node name="TargetPanel" type="Control" parent="CanvasLayer"]
 
@@ -166,7 +147,7 @@ margin/left = 0.0
 margin/top = 600.0
 margin/right = 40.0
 margin/bottom = 560.0
-script/script = ExtResource( 10 )
+script/script = ExtResource( 9 )
 font_color = Color( 0, 0, 0, 1 )
 
 [node name="targetManager" type="Panel" parent="CanvasLayer/TargetPanel"]
@@ -177,7 +158,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = ExtResource( 8 )
+theme/theme = ExtResource( 10 )
 margin/left = 1.0
 margin/top = -396.0
 margin/right = 404.0
@@ -299,6 +280,8 @@ script/script = ExtResource( 13 )
 
 [node name="WindowDialog" type="WindowDialog" parent="CanvasLayer/minimap"]
 
+editor/display_folded = true
+visibility/visible = false
 anchor/top = 3
 anchor/bottom = 3
 focus/ignore_mouse = false
@@ -318,7 +301,7 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = ExtResource( 8 )
+theme/theme = ExtResource( 10 )
 margin/left = 0.0
 margin/top = -2.0
 margin/right = 152.0

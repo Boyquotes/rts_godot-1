@@ -92,7 +92,7 @@ func PlaceUnits(unit_list, result=null):
 			angle = Unit.get_pos().angle_to_point(camera.get_global_mouse_pos())
 		Unit.to_pos = Unit.matrix_pos.rotated(angle)+ Unit.global_pos
 		Unit.angle = angle
-		Unit.vec = ((Unit.to_pos - Unit.get_global_pos()).normalized()) * Unit.speed / 2
+		Unit.vec = (((Unit.to_pos - Unit.get_global_pos()) * Unit.speed / 2).normalized())
 		#print(co[ uf[pos].x ][ uf[pos].y ], ' ',camera.get_global_mouse_pos())
 		pos += 1
 

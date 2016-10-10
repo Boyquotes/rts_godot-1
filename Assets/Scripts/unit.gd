@@ -61,17 +61,17 @@ func _ready():
 	
 
 func _process(delta):
-	if to_pos != last_pos:
+	if ((to_pos != last_pos)):
 		if to_pos.distance_to(last_pos) < 1:
 			last_pos = to_pos
 		else:
-			#vec = ((Unit.to_pos - Unit.get_global_pos()).normalized()) * Unit.speed / 2
-			#set_global_pos(get_global_pos() + vec * speed / 2)   
-			translate(vec)
+			if to_pos.x > 0 and to_pos.y > 0:
+				#vec = ((Unit.to_pos - Unit.get_global_pos()).normalized()) * Unit.speed / 2
+				#set_global_pos(get_global_pos() + vec * speed / 2)   
+				translate(vec)
 			last_pos = get_global_pos()
 		set_rot(get_global_pos().angle_to_point(to_pos))
-
-#		#update()
+		update()
 	else:
 		if (get_rot() != angle and angle != null):
 			set_rot(angle)  

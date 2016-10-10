@@ -39,4 +39,6 @@ texture = ExtResource( 6 )
 
 texture = ExtResource( 7 )
 
+[node name="water" type="Sprite" parent="."]
+
 

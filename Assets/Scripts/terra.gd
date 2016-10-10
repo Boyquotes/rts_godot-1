@@ -1,10 +1,10 @@
 extends Node2D
 #  Copyright 2016 Derbin Dmitry
 
-export var size_x = 40
-export var size_y = 40
-export var count_forest = 8
-export var count_tree = 36
+export var size_x = 200
+export var size_y = 200
+export var count_forest = 10
+export var count_tree = 500
 onready var tilemap_terra = get_node('TileMap_terra')
 onready var tilemap_forest = get_node('TileMap_forest')
 var map = Map.new(size_x, size_y, count_forest, count_tree)
