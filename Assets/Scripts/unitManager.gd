@@ -92,7 +92,7 @@ func PlaceUnits(unit_list, result=null):
 			angle = Unit.get_pos().angle_to_point(camera.get_global_mouse_pos())
 		Unit.to_pos = Unit.matrix_pos.rotated(angle)+ Unit.global_pos
 		Unit.angle = angle
-		Unit.vec = (((Unit.to_pos - Unit.get_global_pos()) * Unit.speed / 2).normalized())
+		Unit.vec = (((Unit.to_pos - Unit.get_global_pos())).normalized())
 		#print(co[ uf[pos].x ][ uf[pos].y ], ' ',camera.get_global_mouse_pos())
 		pos += 1
 
@@ -132,7 +132,7 @@ func add_unit(player_name, unit_name, unit_cord):
 	unit = unit_scene.instance()
 	#unit.unit_obj = unit.init(players.player_list[player_name], unit_name, unit_cord) 
 	unit.init(players.player_list[player_name], unit_name, unit_cord) 
-	unit.set_pos(unit.cord) 
+	unit.set_pos(unit.coord) 
 	add_child(unit)
 	
 	

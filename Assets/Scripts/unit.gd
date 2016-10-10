@@ -27,30 +27,30 @@ var power_type  #	var strange_type = 1
 var national      #	var national = "poland"
 var speed         #	var speed = 4
 var demoral       #var demoral = 1
-var cord
+var coord
 var type_form = null
 var tag = null
 
-func init(player, unit_name, cord):
+func init(player, name, cord):
 	var unit_conf = load("res://Assets/Configs/unit_list.gd").new()
-	self.ID = player["ID"]
-	self.unit_name = unit_name
-	self.national = player["national"]
-	for tk in unit_conf.units[self.national].keys():
-		for tkk in unit_conf.units[self.national][tk].keys():
+	ID = player["ID"]
+	unit_name = name
+	national = player["national"]
+	for tk in unit_conf.units[national].keys():
+		for tkk in unit_conf.units[national][tk].keys():
 			if tkk == unit_name:
-				self.type = tk
+				type = tk
 				break
-		if (self.type != null): break
-	self.cord = cord
-	var conf_uni = unit_conf.units[self.national][self.type][self.unit_name]
-	self.health = conf_uni["health"]
-	self.morale = conf_uni["morale"]
-	self.power = conf_uni["power"]
-	self.power_speed = conf_uni["power_speed"]
-	self.power_type = conf_uni["power_type"]
-	self.speed = conf_uni["speed"]
-	self.demoral = conf_uni["demoral"]
+		if (type != null): break
+	coord = cord
+	var conf_uni = unit_conf.units[national][type][unit_name]
+	health = conf_uni["health"]
+	morale = conf_uni["morale"]
+	power = conf_uni["power"]
+	power_speed = conf_uni["power_speed"]
+	power_type = conf_uni["power_type"]
+	speed = conf_uni["speed"]
+	demoral = conf_uni["demoral"]
 	
 
 func _ready():
@@ -68,10 +68,10 @@ func _process(delta):
 			if to_pos.x > 0 and to_pos.y > 0:
 				#vec = ((Unit.to_pos - Unit.get_global_pos()).normalized()) * Unit.speed / 2
 				#set_global_pos(get_global_pos() + vec * speed / 2)   
-				translate(vec)
+				translate(vec * speed / 2)
 			last_pos = get_global_pos()
 		set_rot(get_global_pos().angle_to_point(to_pos))
-		update()
+	#	update()
 	else:
 		if (get_rot() != angle and angle != null):
 			set_rot(angle)  
