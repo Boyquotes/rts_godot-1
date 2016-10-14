@@ -1,8 +1,5 @@
 extends Control
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
 export var font_color = Color(0,0,0)
 onready var units_scene = get_node("../../world/units")
 onready var control_scene = get_node("../../Control")
@@ -10,10 +7,9 @@ onready var target_army_grid = get_node("targetManager/ScrollContainer/VBoxConta
 
 func _ready():
 	set_process(true)
-var i = 0
 
+var i = 0
 func _process(delta):
-	#print (u_inst.unit_select_group)
 	if units_scene.unit_select_group != []:
 		show()
 		if i == 0:
@@ -31,8 +27,6 @@ func _process(delta):
 				if File.new().file_exists(path_file_icon) != true:
 					path_file_icon = "res://Assets/Textures/Units/default.png"
 				button.set_button_icon(load(path_file_icon))
-				#button.set_stop_mouse(true)
-				#button.set_ignore_mouse(true)
 				button.set_flat(true)
 				button.add_color_override("font_color", font_color)
 				target_army_grid.add_child(button)
@@ -45,18 +39,7 @@ func _process(delta):
 func clean_target_grid(target_army_grid, exception=[]):
 	for button_unit in target_army_grid.get_children():
 		if not(button_unit.get_name() in exception):
-			#free()
 			target_army_grid.remove_child(button_unit) #возможно тут еще надо делать free!!!
-
-var f = 1
-	
-func _on_Button_pressed():
-	f-=10
-	for Unit in units_scene.unit_select_group:
-		Unit.to_pos = Unit.matrix_pos.rotated(deg2rad(f)) + Unit.global_pos
-		
-	
-func _on_Button1_pressed():
-	f+=10
-	for Unit in units_scene.unit_select_group:
-		Unit.to_pos = Unit.matrix_pos.rotated(deg2rad(f)) + Unit.global_pos
+ 
+#var f = 1
+#Unit.to_pos = Unit.matrix_pos.rotated(deg2rad(f)) + Unit.global_pos

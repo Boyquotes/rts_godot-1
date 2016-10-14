@@ -13,8 +13,7 @@ func _ready():
 	map.render([tilemap_terra, tilemap_forest])
 
 class RndCoord:
-	var x 
-	var y 
+	var x;	var y 
 	func _init(x_max, y_max):
 		x = randi() % x_max
 		y = randi() % y_max
@@ -41,8 +40,7 @@ class Map:
 	func _init(size_x, size_y, count_forest, count_tree):
 		for x in range(0, size_x):
 			var tmp = [] 
-			for y in range(0, size_y):
-				tmp.append(DEFAULT_GRASS)
+			for y in range(0, size_y):	tmp.append(DEFAULT_GRASS)
 			map.append(tmp)
 		gen_forest(size_x, size_y, count_forest, count_tree)
 
@@ -57,29 +55,22 @@ class Map:
 			var dir = 0
 			var tile
 			var count_obj = 0
-			if type_rnd == 'struct':
-				tile = tiles[randi() % tiles.size()]
+			if type_rnd == 'struct':	tile = tiles[randi() % tiles.size()]
 			while count_obj != count_obj_max:
 				dir = randi() % 4				
-				if dir == 0  and x + 1 <= size_x:
-					x += 1
-				if dir == 1  and x - 1 <= 0:
-					x += -1
-				if dir == 2 and y + 1 <= size_y:
-					y += 1
-				if dir == 3 and y - 1 >= 0:
-					y += -1
-				if type_rnd == 'full':
-					tile = tiles[randi() % tiles.size()]
-				if size_x-1 > abs(x) and size_y-1 > abs(y):
-					map[x][y] = tile
+				if dir == 0  and x + 1 <= size_x:	x += 1
+				if dir == 1  and x - 1 <= 0:		x += -1
+				if dir == 2 and y + 1 <= size_y:	y += 1
+				if dir == 3 and y - 1 >= 0:			y += -1
+				if type_rnd == 'full':	tile = tiles[randi() % tiles.size()]
+				if size_x-1 > abs(x) and size_y-1 > abs(y):	map[x][y] = tile
 				count_obj += 1
 	
 	func gen_forest(size_x, size_y, count_forest, count_tree):
 		gen_rnd_struct(size_x, size_y, count_forest, count_tree, [ID_FOREST, ID_FOREST2, ID_FOREST3, ID_FOREST4, ID_FOREST5])
 	
 	func set_default_grass(n):
-		DEFAULT_GRASS = n
+		DEFAULT_GRASS = n 
 	
 	func render(tilemaps):
 		randomize()

@@ -13,8 +13,7 @@ var player_list = {}
 				
 func _ready():
 	add_player('Timofffee', 'human', 'Poland')
-	add_player('ai1', 'ai', 'Poland')
-	print (player_list)
+	add_player('ai1', 'ai', 'Poland') 
 	
 func add_player(name, type, national):
 	player_list[name] = {'ID' : player_list.size(), "national" : national, 'type_player' : type}

@@ -52,34 +52,28 @@ func init(player, name, cord):
 	speed = conf_uni["speed"]
 	demoral = conf_uni["demoral"]
 	
-
 func _ready():
 	set_texture(unit_manager.unit_images[unit_name])
 	add_to_group("player_army")
 	set_modulate(current_color_unit)
 	set_process(true)
 	
-
 func _process(delta):
 	if ((to_pos != last_pos)):
-		if to_pos.distance_to(last_pos) < 1:
-			last_pos = to_pos
+		if to_pos.distance_to(last_pos) < 1:	last_pos = to_pos
 		else:
-			if to_pos.x > 0 and to_pos.y > 0:
-				#vec = ((Unit.to_pos - Unit.get_global_pos()).normalized()) * Unit.speed / 2
-				#set_global_pos(get_global_pos() + vec * speed / 2)   
-				translate(vec * speed / 2)
+			if to_pos.x > 0 and to_pos.y > 0:	translate(vec * speed / 2)
 			last_pos = get_global_pos()
 		set_rot(get_global_pos().angle_to_point(to_pos))
-	#	update()
-	else:
-		if (get_rot() != angle and angle != null):
-			set_rot(angle)  
-			angle = null 
+	elif (get_rot() != angle and angle != null):
+		set_rot(angle)  
+		angle = null 
 
 
 
 func selecting(s, l):
+	var one_select_unit = false
+	var only_one = false
 	var sx = false
 	var sy = false
 	var x = false
@@ -87,32 +81,26 @@ func selecting(s, l):
 	if s.x > l.x: sx = true
 	if s.y > l.y: sy = true
 	if (Vector2(abs(s.x - l.x), abs(s.y - l.y)) < Vector2(10, 10) ):
-		if sx:
-			s.x +=8
-			l.x += -8
-		else:
-			s.x += -8
-			l.x += 8
-		if sy:
-			s.y += 8
-			l.y += -8
-		else:
-			s.y += -8
-			l.y += 8
-	if sx:
-		if get_global_pos().x > l.x and (get_global_pos().x < s.x): x = true
-	else:
-		if get_global_pos().x < l.x and (get_global_pos().x > s.x): x = true
-	if sy:
-		if get_global_pos().y > l.y and (get_global_pos().y < s.y): y = true
-	else:
-		if get_global_pos().y < l.y and (get_global_pos().y > s.y): y = true
+		only_one = true
+		if sx:	s.x +=4;	l.x += -4
+		else:	s.x += -4;	l.x += 4
+		if sy:	s.y += 4;	l.y += -4
+		else:	s.y += -4;	l.y += 4
+	if sx:	if get_global_pos().x > l.x and (get_global_pos().x < s.x): x = true
+	else:	if get_global_pos().x < l.x and (get_global_pos().x > s.x): x = true
+	if sy:	if get_global_pos().y > l.y and (get_global_pos().y < s.y): y = true
+	else:	if get_global_pos().y < l.y and (get_global_pos().y > s.y): y = true
 	
-	if x and y: 
-		current_color_unit = select_color_unit
+	if x and y: 	if (only_one):	one_select_unit = true
 		select = true
 		if not(self in unit_manager.unit_select_group): 
-			unit_manager.unit_select_group.append(self) 
+			if one_select_unit : 
+				if unit_manager.unit_select_group.size() < 1: 
+					current_color_unit = select_color_unit
+					unit_manager.unit_select_group.append(self) 
+			else:
+				current_color_unit = select_color_unit
+				unit_manager.unit_select_group.append(self) 
 	else:
 		current_color_unit = diffuse_color_unit
 		select = false 

@@ -8,54 +8,54 @@ export var select_color = Color(0,1,0,0.1)
 export var select_color_border = Color(0,1,0)
 var start_point = Vector2()
 var last_point = Vector2()
+var start_point_loc = Vector2()
+var last_point_loc = Vector2()
 var minimap_move = false
 
 
 func controller_select():
 	if Input.is_action_just_pressed("LKM"):
-		#get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
-		for unit in units_scene.unit_select_group:
-			unit.unselect()
+		for unit in units_scene.unit_select_group:	unit.unselect()
 		if minimap_move == false:
 			start_point = cam.get_global_mouse_pos()
+			start_point_loc = get_viewport().get_mouse_pos()
 	if Input.is_action_pressed("LKM"):
 		if minimap_move == false:
-
 			last_point = cam.get_global_mouse_pos()
-			update()
+			last_point_loc = get_viewport().get_mouse_pos()
+			draw_select_area()
 	elif Input.is_action_just_released("LKM"):
-		if minimap_move == false:
-			get_tree().call_group(2, "player_army", "selecting", start_point, last_point )
+		if minimap_move == false: 	get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
 		start_point = Vector2()
 		last_point = Vector2()
-		update() 
+		start_point_loc = Vector2()
+		last_point_loc = Vector2()
+		draw_select_area()
 
 func _process(delta):
-
 	if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible())):
-		#print(get_viewport().get_mouse_pos().y,' ', target_manager.get_global_pos().y)
 		if ((target_manager.is_visible()) and
 			((get_viewport().get_mouse_pos().y < target_manager.get_global_pos().y) or 
 			(get_viewport().get_mouse_pos().x > (target_manager.get_global_pos().x + target_manager.get_size().x)))):	
 			controller_select()
-		elif not(target_manager.is_visible()):
-			controller_select()
-
-
-
+		elif not(target_manager.is_visible()):	controller_select()
 
 func draw_select_area():
-	draw_rect(Rect2(start_point, last_point-start_point), select_color)
-	draw_line(start_point, Vector2(start_point.x, last_point.y), select_color_border)
-	draw_line(start_point, Vector2(last_point.x, start_point.y), select_color_border)
-	draw_line(Vector2(start_point.x, last_point.y), last_point, select_color_border)
-	draw_line(Vector2(last_point.x, start_point.y), last_point, select_color_border)
-
-func _draw():
-	draw_select_area()
+	var sel_ar = get_node("../CanvasLayer/select_area")
+	sel_ar.show()
+	if (start_point_loc.x < last_point_loc.x):
+		sel_ar.set_margin(0,start_point_loc.x)
+		sel_ar.set_margin(2,last_point_loc.x)
+	else:	sel_ar.set_margin(2,start_point_loc.x)
+		sel_ar.set_margin(0,last_point_loc.x)
+	if (start_point_loc.y < last_point_loc.y):
+		sel_ar.set_margin(1,start_point_loc.y)
+		sel_ar.set_margin(3,last_point_loc.y)
+	else:	sel_ar.set_margin(3,start_point_loc.y)
+		sel_ar.set_margin(1,last_point_loc.y)
 
 func _ready():
-	set_process(true)
+	draw_select_area();	set_process(true)
 
 
 

@@ -9,11 +9,10 @@ onready var label_mouse_pos = get_node('label_mouse_pos')
 var unit_list # конфигурация юнитов
 
 func TEST_gen_10000():
-	var offset = 100
-	var count = 0
+	var offset = 100; var count = 0
 	while count <= 100:
 		var line = 0
-		while line <= 100:
+		while line <= 1:
 			units_scene.add_unit("Timofffee", "elear", Vector2(offset + count*10,offset+line*10))
 			line += 1
 		count += 1
@@ -57,9 +56,8 @@ func _ready():
 func _fixed_process(delta):
 	label_mouse_pos.set_text('X:' + str(get_viewport().get_mouse_pos().x) + ' Y:' + str(get_viewport().get_mouse_pos().y))
 	if Input.is_action_just_pressed("DT_unit_manager"):
-		if is_visible():
-			current_unit = null; hide()
-		else: show()
+		if is_visible():	current_unit = null; hide()
+		else:				show()
 	if current_unit != null and (Input.is_action_pressed("DT_unit_add")):
 		if Input.is_action_just_pressed("LKM"):
 			units_scene.add_unit("Timofffee", current_unit, cam.get_global_mouse_pos())  

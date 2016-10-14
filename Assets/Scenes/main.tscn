@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=16 format=1]
 
 [ext_resource path="res://Assets/Scripts/players.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Scripts/control.gd" type="Script" id=2]
@@ -6,13 +6,27 @@
 [ext_resource path="res://Assets/Scenes/terra.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Scripts/unitManager.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Scenes/DevPanel.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Scripts/mapManager.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Scripts/targetManager.gd" type="Script" id=9]
-[ext_resource path="res://Assets/Themes/in_game.tres" type="Theme" id=10]
-[ext_resource path="res://Assets/Textures/Control/box.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Textures/Control/fillbox.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Scripts/minimap.gd" type="Script" id=13]
+[ext_resource path="res://Assets/Themes/menu.tres" type="Theme" id=7]
+[ext_resource path="res://Assets/Scripts/mapManager.gd" type="Script" id=8]
+[ext_resource path="res://Assets/Textures/Map/grass2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Scripts/targetManager.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Themes/in_game.tres" type="Theme" id=11]
+[ext_resource path="res://Assets/Textures/Control/box.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Textures/Control/fillbox.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Scripts/minimap.gd" type="Script" id=14]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+bg_color = Color( 0.527344, 0.723053, 1, 0.355191 )
+light_color = Color( 0.153534, 0.414966, 0.914063, 1 )
+dark_color = Color( 0.259277, 0.564693, 0.921875, 1 )
+border_size = 1
+border_blend = false
+draw_bg = true
 
 [node name="main" type="Node2D"]
 
@@ -78,19 +92,32 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 
+[node name="select_area" type="Panel" parent="CanvasLayer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 125.0
+margin/bottom = 66.0
+custom_styles/panel = SubResource( 1 )
+
 [node name="DevPanel" parent="CanvasLayer" instance=ExtResource( 6 )]
 
 anchor/left = 1
 anchor/right = 1
+theme/theme = ExtResource( 7 )
 margin/left = 1024.0
 margin/right = 984.0
 
 [node name="Unknow" parent="CanvasLayer/DevPanel/unit_manager/national_tabs"]
 
-margin/left = 24.0
-margin/top = 54.0
-margin/right = 24.0
-margin/bottom = 24.0
+margin/left = 10.0
+margin/top = 32.0
+margin/right = 10.0
+margin/bottom = 10.0
 
 [node name="label_mouse_pos" type="Label" parent="CanvasLayer/DevPanel"]
 
@@ -117,7 +144,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 40.0
-script/script = ExtResource( 7 )
+script/script = ExtResource( 8 )
 
 [node name="bt_ch_background_map" type="Button" parent="CanvasLayer/MapMode"]
 
@@ -132,7 +159,7 @@ margin/bottom = 39.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-icon = ExtResource( 8 )
+icon = ExtResource( 9 )
 flat = false
 
 [node name="TargetPanel" type="Control" parent="CanvasLayer"]
@@ -147,7 +174,7 @@ margin/left = 0.0
 margin/top = 600.0
 margin/right = 40.0
 margin/bottom = 560.0
-script/script = ExtResource( 9 )
+script/script = ExtResource( 10 )
 font_color = Color( 0, 0, 0, 1 )
 
 [node name="targetManager" type="Panel" parent="CanvasLayer/TargetPanel"]
@@ -158,7 +185,7 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = ExtResource( 10 )
+theme/theme = ExtResource( 11 )
 margin/left = 1.0
 margin/top = -396.0
 margin/right = 404.0
@@ -189,7 +216,7 @@ margin/bottom = 48.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-icon = ExtResource( 11 )
+icon = ExtResource( 12 )
 flat = false
 
 [node name="Button1" type="Button" parent="CanvasLayer/TargetPanel/targetManager/GridContainer1"]
@@ -205,7 +232,7 @@ margin/bottom = 48.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-icon = ExtResource( 12 )
+icon = ExtResource( 13 )
 flat = false
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TargetPanel/targetManager"]
@@ -276,7 +303,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 760.0
 margin/bottom = 560.0
-script/script = ExtResource( 13 )
+script/script = ExtResource( 14 )
 
 [node name="WindowDialog" type="WindowDialog" parent="CanvasLayer/minimap"]
 
@@ -301,7 +328,7 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-theme/theme = ExtResource( 10 )
+theme/theme = ExtResource( 11 )
 margin/left = 0.0
 margin/top = -2.0
 margin/right = 152.0
