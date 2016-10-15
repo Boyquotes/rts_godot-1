@@ -69,14 +69,16 @@ func area_not_is_target_manager():
 		(get_viewport().get_mouse_pos().x > (target_manager.get_global_pos().x + target_manager.get_size().x)))):
 		return true
 	else:
-		false
+		return false
 
 func area_not_is_info_panel():
 	if((info_panel.is_visible()) and 
 		(get_viewport().get_mouse_pos().x < info_panel.get_global_pos().x)):
 		return true
 	else:
-		false
+		start_point = cam.get_global_mouse_pos()
+		start_point_loc = get_viewport().get_mouse_pos()
+		return false
 
 func _ready():
 	draw_select_area();	set_process(true)

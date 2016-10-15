@@ -5,6 +5,7 @@ extends Control
 # var b = "textvar"
 export var font_color = Color(0,0,0)
 var tr_Army = 'Army'
+onready var cam = get_node('../../Camera2D')
 onready var units = get_node('../../world/units')
 onready var control = get_node('../../Control')
 onready var tags_grid = get_node('Panel/ScrollContainer/GridContainer')
@@ -35,4 +36,6 @@ func _on_tag_select(tag):
 	for unit in units.get_children():
 		if unit.tag == tag:
 			unit.select()
+
+
 
