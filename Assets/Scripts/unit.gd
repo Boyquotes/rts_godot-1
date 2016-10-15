@@ -72,8 +72,6 @@ func _process(delta):
 		set_rot(angle)  
 		angle = null 
 
-
-
 func selecting(s, l):
 	var one_select_unit = false
 	var only_one = false
@@ -117,7 +115,7 @@ func select():
 	current_color_unit = select_color_unit
 	unit_manager.unit_select_group.append(self) 
 	set_modulate(current_color_unit)
-	update()
+
 	
 func unselect():
 	current_color_unit = diffuse_color_unit

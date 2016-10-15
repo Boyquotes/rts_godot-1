@@ -8,7 +8,7 @@ var unit_select_group = []
 var distance = 10
 var groups = 0
 var count_tags = 0
-onready var minimap = get_node("../../CanvasLayer/minimap")
+
 onready var infoPanel = get_node("../../CanvasLayer/infoPanel")
 
 var unit_images = {}
@@ -17,7 +17,7 @@ var unit_conf = load("res://Assets/Configs/unit_list.gd").new()
 var mSet = load("res://Assets/Scripts/modules/mSet.gd")
 
 var free_tags = []
-var tags = {0:''}
+var tags = {0 : ''}
 
 func get_tags(units):
 	var d = {}

@@ -34,10 +34,11 @@ func controller_select():
 
 func _process(delta):
 	if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible())):
-		if area_not_is_target_manager() and area_not_is_info_panel():
-			controller_select()
-		elif not(target_manager.is_visible()):
-			controller_select()
+		if area_not_is_info_panel():
+			if area_not_is_target_manager():
+				controller_select()
+			elif not(target_manager.is_visible()):
+				controller_select()
 
 func draw_select_area():
 	var sel_ar = get_node("../CanvasLayer/select_area")
