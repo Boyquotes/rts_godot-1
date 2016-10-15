@@ -13,6 +13,47 @@ onready var minimap = get_node("../../CanvasLayer/minimap")
 var unit_images = {}
 var unit_conf = load("res://Assets/Configs/unit_list.gd").new()
 
+var mSet = load("res://Assets/Scripts/modules/mSet.gd")
+
+var tags = {0:''}
+
+func get_tags(units):
+	var d = {}
+	for unit in units:
+		d[unit.tag] = null
+	return d.keys()
+
+func tag_to_units(units, tag):
+	var m = []
+	for unit in units:
+		if unit.tag == tag:
+			m.append(unit)
+	return m
+
+func create_tag(sel_units, type):
+	var d = {}
+	var new_tag = null
+	var _tags = get_tags(sel_units)
+	for tag in _tags:
+		var a = mSet.new(tag_to_units(self.get_children(), tag))
+		if a.difference(tag_to_units(sel_units, tag))==[]:
+			d[tag] = 'full'
+			new_tag = tag
+			break
+		else:
+			d[tag] = 'part'
+	if new_tag == null:
+		new_tag = tags.size()
+		tags[new_tag] = type
+	else:
+		tags[new_tag] = type
+	for unit in sel_units:
+		unit.tag = new_tag
+
+	
+			
+			
+			
 func list_files_in_directory(path):
 	var files = []
 	var dir = Directory.new()
@@ -83,8 +124,12 @@ func PlaceUnits(unit_list, result=null):
 		Unit.angle = angle
 		Unit.vec = (((Unit.to_pos - Unit.get_global_pos())).normalized())
 		pos += 1
+	create_tag(unit_list,'')
+	print(get_tags(self.get_children()))
+	
 
-func _ready(): 
+func _ready():
+
 	for national in unit_conf.units.keys(): 
 		for type in unit_conf.units[national]:
 			for name in unit_conf.units[national][type]:

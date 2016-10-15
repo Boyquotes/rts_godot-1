@@ -29,7 +29,7 @@ var speed         #	var speed = 4
 var demoral       #var demoral = 1
 var coord
 var type_form = null
-var tag = null
+var tag = 0
 
 func init(player, name, cord):
 	var unit_conf = load("res://Assets/Configs/unit_list.gd").new()

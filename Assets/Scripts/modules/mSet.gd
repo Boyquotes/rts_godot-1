@@ -1,7 +1,9 @@
 extends Node
 #Реализация множеств для Годошечки :3
 var d = {}
-func _init(m):	for i in m:	d[i] = 0
+func _init(m):	
+	for i in m:	
+		d[i] = 0
 
 func intersection(b):
 	var c = []
@@ -19,4 +21,5 @@ func difference(b):
 	for i in c:	if i in a:	c.remove(c.find(i))
 	return c
 
-func get_keys():	return d.keys() 
+func get_keys():	
+	return d.keys() 
