@@ -8,8 +8,10 @@ func _init(m):
 func intersection(b):
 	var c = []
 	for i in d:
-		for j in b:	if i == j:
-				 c.append(i);	 break
+		for j in b:	
+			if i == j:
+				c.append(i)
+				break
 	return c
 
 func union(b):

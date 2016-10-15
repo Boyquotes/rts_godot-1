@@ -15,6 +15,7 @@ var unit_conf = load("res://Assets/Configs/unit_list.gd").new()
 
 var mSet = load("res://Assets/Scripts/modules/mSet.gd")
 
+var free_tags = []
 var tags = {0:''}
 
 func get_tags(units):
@@ -31,25 +32,36 @@ func tag_to_units(units, tag):
 	return m
 
 func create_tag(sel_units, type):
+	print(get_tags(self.get_children()))
 	var d = {}
-	var new_tag = null
+	var new_tag = 0
 	var _tags = get_tags(sel_units)
 	for tag in _tags:
 		var a = mSet.new(tag_to_units(self.get_children(), tag))
 		if a.difference(tag_to_units(sel_units, tag))==[]:
 			d[tag] = 'full'
-			new_tag = tag
-			break
+			if new_tag >= tag or new_tag==0:
+				new_tag = tag
 		else:
 			d[tag] = 'part'
-	if new_tag == null:
-		new_tag = tags.size()
+	#print(d) #test	
+	if new_tag == 0: 
+		if free_tags == []:
+			new_tag = tags.keys().size()
+		else:
+			new_tag = free_tags[0]
 		tags[new_tag] = type
 	else:
 		tags[new_tag] = type
+		var b = mSet.new(_tags)
+		free_tags = b.difference([new_tag])
+		for k in free_tags:
+			tags.erase(k)
+		
 	for unit in sel_units:
 		unit.tag = new_tag
-
+		
+	print(get_tags(self.get_children()))
 	
 			
 			
@@ -125,7 +137,7 @@ func PlaceUnits(unit_list, result=null):
 		Unit.vec = (((Unit.to_pos - Unit.get_global_pos())).normalized())
 		pos += 1
 	create_tag(unit_list,'')
-	print(get_tags(self.get_children()))
+
 	
 
 func _ready():
