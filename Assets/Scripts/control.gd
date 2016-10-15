@@ -13,10 +13,9 @@ var start_point_loc = Vector2()
 var last_point_loc = Vector2()
 var minimap_move = false
 
-
 func controller_select():
 	if Input.is_action_just_pressed("LKM"):
-		for unit in units_scene.unit_select_group:	
+		for unit in units_scene.unit_select_group:
 			unit.unselect()
 		start_point = cam.get_global_mouse_pos()
 		start_point_loc = get_viewport().get_mouse_pos()

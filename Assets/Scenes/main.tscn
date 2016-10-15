@@ -379,6 +379,10 @@ script/script = ExtResource( 15 )
 
 [connection signal="pressed" from="CanvasLayer/MapMode/bt_ch_background_map" to="CanvasLayer/MapMode" method="_on_bt_ch_background_map_pressed"]
 
+[connection signal="mouse_exit" from="CanvasLayer/infoPanel/Panel" to="CanvasLayer/infoPanel" method="_on_Panel_mouse_exit"]
+
+[connection signal="timeout" from="CanvasLayer/infoPanel/Panel/minimap_refresh" to="CanvasLayer/infoPanel/Panel/minimap" method="_on_minimap_refresh_timeout"]
+
 
 [editable path="world"]
 [editable path="CanvasLayer/DevPanel"]
