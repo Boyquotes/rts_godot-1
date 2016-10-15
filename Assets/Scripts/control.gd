@@ -39,11 +39,13 @@ func _process(delta):
 			elif not(target_manager.is_visible()):
 				controller_select()
 		else:		
-			start_point = cam.get_global_mouse_pos()
-			start_point_loc = get_viewport().get_mouse_pos()
-			last_point = cam.get_global_mouse_pos()
-			last_point_loc =  get_viewport().get_mouse_pos()
-			draw_select_area()
+			if Input.is_action_just_released("LKM"):
+				get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
+				start_point = Vector2()
+				last_point = Vector2()
+				start_point_loc = Vector2()
+				last_point_loc = Vector2()
+				draw_select_area()
 
 func draw_select_area():
 	var sel_ar = get_node("../CanvasLayer/select_area")
