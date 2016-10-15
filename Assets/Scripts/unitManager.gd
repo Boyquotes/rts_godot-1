@@ -9,7 +9,7 @@ var distance = 10
 var groups = 0
 var count_tags = 0
 onready var minimap = get_node("../../CanvasLayer/minimap")
-onready var tagPanel = get_node("../../CanvasLayer/infoPanel")
+onready var infoPanel = get_node("../../CanvasLayer/infoPanel")
 
 var unit_images = {}
 var unit_conf = load("res://Assets/Configs/unit_list.gd").new()
@@ -32,51 +32,51 @@ func tag_to_units(units, tag):
 			m.append(unit)
 	return m
 
+func min_tag(tags):
+	var m = tags[0]
+	for tag in tags:
+		if tag <= m:
+			m = tag
+	return m
+	
 func create_tag(sel_units, type):
-	print(get_tags(self.get_children()))
-	var d = {}
-	var new_tags = []
-	var new_tag = -1
 	var _tags = get_tags(sel_units) # получить все уникальные теги в выделении 
+	var d = {}
 	for tag in _tags: 
 		var a = mSet.new(tag_to_units(self.get_children(), tag)) #получить всех юнитов тега tag  и создать из них множество
 		if a.difference(tag_to_units(sel_units, tag))==[]: #вычесть из прошлого множества юнитов в выделении с тегом tag 
-			d[tag] = 'full'
-			new_tags.append(tag)
-			new_tag = new_tags[0]
+			d[tag] = 'full'	
 		else:
 			d[tag] = 'part'
-		a.free()
-
-	for tag in new_tags:
-		if new_tag >= tag:
-			 new_tag = tag
-	
-	print ('min',new_tag)
-
-	if new_tag == -1: 
+	var val 
+	var m = []
+	if 'full' in d.values():
+		for tag in d:
+			if d[tag] == 'full':
+				m.append(tag)
+			else:
+				free_tags.append(tag)
+		var a = mSet.new(m)
+		val = min_tag(m)
+		for tag in a.difference([val]):
+			free_tags.append(tag)
+		for unit in sel_units:
+			unit.tag = val
+	else:	
+		#print (free_tags)
 		if free_tags == []:
-			new_tag = tags.keys().size()
+			val = get_tags(self.get_children()).size()
 		else:
-			new_tag = free_tags[0]
+			free_tags.sort()
+			val = free_tags[0]
 			free_tags.remove(0)
-		tags[new_tag] = type
-	else:
-		tags[new_tag] = type
-		var b = mSet.new(_tags)
-		free_tags = b.difference([new_tag]) #mSet.new(free_tags).union(
 
-		for k in free_tags:
-			if k != 0:
-				tags.erase(k)
-		b.free()
+		for unit in sel_units:
+			unit.tag = val
 			
-	for unit in sel_units:
-		unit.tag = new_tag
-	tagPanel.upd()
-		
-		
-	print('free: ',free_tags, ' tags:', tags,' ', get_tags(self.get_children()))
+	if get_tags(self.get_children())==[0]:
+		free_tags = []
+	infoPanel.upd_tags()
 	
 			
 			
