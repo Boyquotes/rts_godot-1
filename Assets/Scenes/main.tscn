@@ -296,19 +296,22 @@ columns = 4
 
 [node name="infoPanel" type="Control" parent="CanvasLayer"]
 
+anchor/right = 1
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin/right = 984.0
+margin/bottom = 728.0
 script/script = ExtResource( 14 )
 font_color = Color( 0, 0, 0, 1 )
 
 [node name="Panel" type="Panel" parent="CanvasLayer/infoPanel"]
 
+anchor/left = 1
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -316,10 +319,10 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 11 )
-margin/left = 835.0
+margin/left = -795.0
 margin/top = 0.0
-margin/right = -982.0
-margin/bottom = -726.0
+margin/right = -983.0
+margin/bottom = -728.0
 
 [node name="minimap_refresh" type="Timer" parent="CanvasLayer/infoPanel/Panel"]
 
@@ -330,14 +333,16 @@ autostart = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/infoPanel/Panel"]
 
+anchor/left = 3
+anchor/right = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 24.0
+margin/left = 70.0
 margin/top = 24.0
-margin/right = 98.0
-margin/bottom = 221.0
+margin/right = -71.0
+margin/bottom = 604.0
 scroll/horizontal = false
 scroll/vertical = true
 
@@ -355,15 +360,19 @@ columns = 1
 
 [node name="minimap" type="TextureFrame" parent="CanvasLayer/infoPanel/Panel"]
 
+anchor/left = 3
+anchor/top = 1
+anchor/right = 3
+anchor/bottom = 1
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 11 )
-margin/left = 17.0
-margin/top = 612.0
-margin/right = 172.0
-margin/bottom = 749.0
+margin/left = 78.0
+margin/top = 153.0
+margin/right = -78.0
+margin/bottom = 16.0
 expand = true
 stretch_mode = 0
 script/script = ExtResource( 15 )

@@ -3,6 +3,7 @@ extends Node2D
 onready var cam = get_node("../Camera2D")
 onready var dev_panel = get_node("../CanvasLayer/DevPanel")
 onready var target_manager = get_node("../CanvasLayer/TargetPanel/targetManager")
+onready var info_panel = get_node("../CanvasLayer/infoPanel/Panel")
 onready var units_scene = get_node("../world/units")
 export var select_color = Color(0,1,0,0.1)
 export var select_color_border = Color(0,1,0)
@@ -33,9 +34,10 @@ func controller_select():
 
 func _process(delta):
 	if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible())):
-		if area_not_is_target_manager():	
+		if area_not_is_target_manager() and area_not_is_info_panel():
 			controller_select()
-		elif not(target_manager.is_visible()):	controller_select()
+		elif not(target_manager.is_visible()):
+			controller_select()
 
 func draw_select_area():
 	var sel_ar = get_node("../CanvasLayer/select_area")
@@ -43,12 +45,14 @@ func draw_select_area():
 	if (start_point_loc.x < last_point_loc.x):
 		sel_ar.set_margin(0,start_point_loc.x)
 		sel_ar.set_margin(2,last_point_loc.x)
-	else:	sel_ar.set_margin(2,start_point_loc.x)
+	else:
+		sel_ar.set_margin(2,start_point_loc.x)
 		sel_ar.set_margin(0,last_point_loc.x)
 	if (start_point_loc.y < last_point_loc.y):
 		sel_ar.set_margin(1,start_point_loc.y)
 		sel_ar.set_margin(3,last_point_loc.y)
-	else:	sel_ar.set_margin(3,start_point_loc.y)
+	else:
+		sel_ar.set_margin(3,start_point_loc.y)
 		sel_ar.set_margin(1,last_point_loc.y)
 
 func area_not_is_target_manager():
@@ -60,9 +64,8 @@ func area_not_is_target_manager():
 		false
 
 func area_not_is_info_panel():
-	if((target_manager.is_visible()) and
-		((get_viewport().get_mouse_pos().y < target_manager.get_global_pos().y) or 
-		(get_viewport().get_mouse_pos().x > (target_manager.get_global_pos().x + target_manager.get_size().x)))):
+	if((info_panel.is_visible()) and 
+		(get_viewport().get_mouse_pos().x < info_panel.get_global_pos().x)):
 		return true
 	else:
 		false
