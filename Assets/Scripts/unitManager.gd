@@ -128,7 +128,8 @@ func box(unit_list):
 				if x == 0 or y == 0 or x == l-1 or y == l-1:
 					tmp.append(Vector2(distance * x, distance * y))
 					uf.append(Vector2(x,y))	
-				else:	tmp.append(null)
+				else:
+					tmp.append(null)
 			co.append(tmp)
 		return [co, uf]
 
@@ -146,8 +147,9 @@ func PlaceUnits(unit_list, result=null):
 		#перемешает точки в позиции построения
 		Unit.matrix_pos = co[ uf[pos].x ][ uf[pos].y ]  
 		Unit.global_pos = camera.get_global_mouse_pos() 
-		if angle == null:	angle = Unit.get_pos().angle_to_point(camera.get_global_mouse_pos())
-		Unit.to_pos = Unit.matrix_pos.rotated(angle)+ Unit.global_pos
+		if angle == null:
+			angle = Unit.get_pos().angle_to_point(camera.get_global_mouse_pos())
+		Unit.to_pos = Unit.matrix_pos.rotated(angle) + Unit.global_pos
 		Unit.angle = angle
 		Unit.vec = (((Unit.to_pos - Unit.get_global_pos())).normalized())
 		pos += 1
