@@ -36,10 +36,3 @@ func _on_tag_select(tag):
 		if unit.tag == tag:
 			unit.select()
 
-func _on_Panel_mouse_exit():
-	if Input.is_action_pressed("LKM"):
-		pass 
-	else:
-		control.draw_select_area()
-
-

@@ -38,6 +38,12 @@ func _process(delta):
 				controller_select()
 			elif not(target_manager.is_visible()):
 				controller_select()
+		else:		
+			start_point = cam.get_global_mouse_pos()
+			start_point_loc = get_viewport().get_mouse_pos()
+			last_point = cam.get_global_mouse_pos()
+			last_point_loc =  get_viewport().get_mouse_pos()
+			draw_select_area()
 
 func draw_select_area():
 	var sel_ar = get_node("../CanvasLayer/select_area")
