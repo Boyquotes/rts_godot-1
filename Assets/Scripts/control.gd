@@ -15,17 +15,16 @@ var minimap_move = false
 
 func controller_select():
 	if Input.is_action_just_pressed("LKM"):
-		for unit in units_scene.unit_select_group:	unit.unselect()
-		if minimap_move == false:
-			start_point = cam.get_global_mouse_pos()
-			start_point_loc = get_viewport().get_mouse_pos()
+		for unit in units_scene.unit_select_group:	
+			unit.unselect()
+		start_point = cam.get_global_mouse_pos()
+		start_point_loc = get_viewport().get_mouse_pos()
 	if Input.is_action_pressed("LKM"):
-		if minimap_move == false:
-			last_point = cam.get_global_mouse_pos()
-			last_point_loc = get_viewport().get_mouse_pos()
-			draw_select_area()
+		last_point = cam.get_global_mouse_pos()
+		last_point_loc = get_viewport().get_mouse_pos()
+		draw_select_area()
 	elif Input.is_action_just_released("LKM"):
-		if minimap_move == false: 	get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
+		get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
 		start_point = Vector2()
 		last_point = Vector2()
 		start_point_loc = Vector2()
@@ -34,9 +33,7 @@ func controller_select():
 
 func _process(delta):
 	if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible())):
-		if ((target_manager.is_visible()) and
-			((get_viewport().get_mouse_pos().y < target_manager.get_global_pos().y) or 
-			(get_viewport().get_mouse_pos().x > (target_manager.get_global_pos().x + target_manager.get_size().x)))):	
+		if area_not_is_target_manager():	
 			controller_select()
 		elif not(target_manager.is_visible()):	controller_select()
 
@@ -54,10 +51,45 @@ func draw_select_area():
 	else:	sel_ar.set_margin(3,start_point_loc.y)
 		sel_ar.set_margin(1,last_point_loc.y)
 
+func area_not_is_target_manager():
+	if((target_manager.is_visible()) and
+		((get_viewport().get_mouse_pos().y < target_manager.get_global_pos().y) or 
+		(get_viewport().get_mouse_pos().x > (target_manager.get_global_pos().x + target_manager.get_size().x)))):
+		return true
+	else:
+		false
+
+func area_not_is_info_panel():
+	if((target_manager.is_visible()) and
+		((get_viewport().get_mouse_pos().y < target_manager.get_global_pos().y) or 
+		(get_viewport().get_mouse_pos().x > (target_manager.get_global_pos().x + target_manager.get_size().x)))):
+		return true
+	else:
+		false
+
 func _ready():
 	draw_select_area();	set_process(true)
 
-
+#func controller_select():
+#	if Input.is_action_just_pressed("LKM"):
+#		for unit in units_scene.unit_select_group:	
+#			unit.unselect()
+#		if minimap_move == false:
+#			start_point = cam.get_global_mouse_pos()
+#			start_point_loc = get_viewport().get_mouse_pos()
+#	if Input.is_action_pressed("LKM"):
+#		if minimap_move == false:
+#			last_point = cam.get_global_mouse_pos()
+#			last_point_loc = get_viewport().get_mouse_pos()
+#			draw_select_area()
+#	elif Input.is_action_just_released("LKM"):
+#		if minimap_move == false:
+#			get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
+#		start_point = Vector2()
+#		last_point = Vector2()
+#		start_point_loc = Vector2()
+#		last_point_loc = Vector2()
+#		draw_select_area()
 
 
 

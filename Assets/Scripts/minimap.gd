@@ -1,18 +1,11 @@
-extends Control
+extends TextureFrame
+onready var terra = get_node('../../../../world')
 
-#onready var upd_timer_minimap = get_node('minimap_refresh')
-onready var terra = get_node('../../world')
-#onready var vs = get_node('ViewportSprite')
-#onready var cam = get_node('Camera/Viewport')
-#onready var vp = get_node('Camera/Viewport')
-#onready var sp = get_node('Viewport/Sprite')
-#onready var tf2 = get_node('Viewport/TextureFrame')
-
-onready var grass = get_node('../../world/TileMap_terra')
-onready var tf = get_node('WindowDialog/TextureFrame')
+onready var grass = get_node('../../../../world/TileMap_terra')
+#onready var tf = get_node('WindowDialog/TextureFrame')
 var imagetexture = ImageTexture.new()
-onready var control_scene = get_node("../../Control")
-onready var units_scene = get_node("../../world/units")
+onready var control_scene = get_node("../../../../Control")
+onready var units_scene = get_node("../../../../world/units")
 var colors = {0:Color(0, 1  , 0), 
 			  1:Color(0, 100, 0),
 	          2:Color(0, 100, 0),
@@ -40,36 +33,25 @@ func gen_minimap_units(minimap_img):
 	return minimap_img
 
 func _ready():		
-	#vp.set_world(get_viewport().get_world())
-	#vp.set_world_2d(get_viewport().get_world_2d())
-
 	minimap_img = Image(terra.size_x, terra.size_y, false, 3)
 	minimap_img = gen_minimap_terra(minimap_img)
 	minimap_img_default = minimap_img
 	imagetexture.create_from_image(minimap_img)
 	imagetexture.set_flags(3)
-	tf.set_texture(imagetexture)
-	get_node('WindowDialog').show()
+	set_texture(imagetexture)
+	#get_node('WindowDialog').show()
 
-func _on_WindowDialog_mouse_enter():
-	control_scene.minimap_move = true
-	#control_scene.start_point = Vector2()
-	#control_scene.last_point = Vector2()
-	#control_scene.update()
+#func _on_WindowDialog_mouse_enter():
+#	control_scene.minimap_move = true
+
 	
 
-func _on_WindowDialog_mouse_exit():
-	control_scene.minimap_move = false
+#func _on_WindowDialog_mouse_exit():
+#	control_scene.minimap_move = false
 
 
 func _on_minimap_refresh_timeout():
-	
-	#var capture = get_viewport().get_screen_capture()
-	#sp.set_texture(get_viewport().get_render_target_texture())
-	#tf2.set_texture(get_viewport().get_render_target_texture())
-	#var rtt = get_viewport().get_render_target_texture()
-	#tf.set_texture(rtt)
 	minimap_img = gen_minimap_units(minimap_img_default)
 	imagetexture.create_from_image(minimap_img)
 	imagetexture.set_flags(3)
-	tf.set_texture(imagetexture)
+	set_texture(imagetexture)

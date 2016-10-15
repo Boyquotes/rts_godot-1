@@ -56,8 +56,10 @@ func _ready():
 func _fixed_process(delta):
 	label_mouse_pos.set_text('X:' + str(get_viewport().get_mouse_pos().x) + ' Y:' + str(get_viewport().get_mouse_pos().y))
 	if Input.is_action_just_pressed("DT_unit_manager"):
-		if is_visible():	current_unit = null; hide()
-		else:				show()
+		if is_visible():
+			current_unit = null; hide()
+		else:
+			show()
 	if current_unit != null and (Input.is_action_pressed("DT_unit_add")):
 		if Input.is_action_just_pressed("LKM"):
 			units_scene.add_unit("Timofffee", current_unit, cam.get_global_mouse_pos())  

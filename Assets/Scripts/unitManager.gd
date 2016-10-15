@@ -9,6 +9,7 @@ var distance = 10
 var groups = 0
 var count_tags = 0
 onready var minimap = get_node("../../CanvasLayer/minimap")
+onready var tagPanel = get_node("../../CanvasLayer/infoPanel")
 
 var unit_images = {}
 var unit_conf = load("res://Assets/Configs/unit_list.gd").new()
@@ -34,34 +35,48 @@ func tag_to_units(units, tag):
 func create_tag(sel_units, type):
 	print(get_tags(self.get_children()))
 	var d = {}
-	var new_tag = 0
-	var _tags = get_tags(sel_units)
-	for tag in _tags:
-		var a = mSet.new(tag_to_units(self.get_children(), tag))
-		if a.difference(tag_to_units(sel_units, tag))==[]:
+	var new_tags = []
+	var new_tag = -1
+	var _tags = get_tags(sel_units) # получить все уникальные теги в выделении 
+	for tag in _tags: 
+		var a = mSet.new(tag_to_units(self.get_children(), tag)) #получить всех юнитов тега tag  и создать из них множество
+		if a.difference(tag_to_units(sel_units, tag))==[]: #вычесть из прошлого множества юнитов в выделении с тегом tag 
 			d[tag] = 'full'
-			if new_tag >= tag or new_tag==0:
-				new_tag = tag
+			new_tags.append(tag)
+			new_tag = new_tags[0]
 		else:
 			d[tag] = 'part'
-	#print(d) #test	
-	if new_tag == 0: 
+		a.free()
+
+	for tag in new_tags:
+		if new_tag >= tag:
+			 new_tag = tag
+	
+	print ('min',new_tag)
+
+	if new_tag == -1: 
 		if free_tags == []:
 			new_tag = tags.keys().size()
 		else:
 			new_tag = free_tags[0]
+			free_tags.remove(0)
 		tags[new_tag] = type
 	else:
 		tags[new_tag] = type
 		var b = mSet.new(_tags)
-		free_tags = b.difference([new_tag])
+		free_tags = b.difference([new_tag]) #mSet.new(free_tags).union(
+
 		for k in free_tags:
-			tags.erase(k)
-		
+			if k != 0:
+				tags.erase(k)
+		b.free()
+			
 	for unit in sel_units:
 		unit.tag = new_tag
+	tagPanel.upd()
 		
-	print(get_tags(self.get_children()))
+		
+	print('free: ',free_tags, ' tags:', tags,' ', get_tags(self.get_children()))
 	
 			
 			

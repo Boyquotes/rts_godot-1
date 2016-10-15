@@ -15,7 +15,10 @@ func intersection(b):
 	return c
 
 func union(b):
-	for i in b:	d[i] = 0
+	var tmp = d
+	for i in b:
+		tmp[i] = 0
+	return tmp.keys()
 
 func difference(b):
 	var c = get_keys()

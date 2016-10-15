@@ -41,7 +41,8 @@ func init(player, name, cord):
 			if tkk == unit_name:
 				type = tk
 				break
-		if (type != null): break
+		if (type != null): 
+			break
 	coord = cord
 	var conf_uni = unit_conf.units[national][type][unit_name]
 	health = conf_uni["health"]
@@ -60,9 +61,11 @@ func _ready():
 	
 func _process(delta):
 	if ((to_pos != last_pos)):
-		if to_pos.distance_to(last_pos) < 1:	last_pos = to_pos
+		if to_pos.distance_to(last_pos) < 1:
+			last_pos = to_pos
 		else:
-			if to_pos.x > 0 and to_pos.y > 0:	translate(vec * speed / 2)
+			if to_pos.x > 0 and to_pos.y > 0:
+				translate(vec * speed / 2)
 			last_pos = get_global_pos()
 		set_rot(get_global_pos().angle_to_point(to_pos))
 	elif (get_rot() != angle and angle != null):
@@ -91,7 +94,9 @@ func selecting(s, l):
 	if sy:	if get_global_pos().y > l.y and (get_global_pos().y < s.y): y = true
 	else:	if get_global_pos().y < l.y and (get_global_pos().y > s.y): y = true
 	
-	if x and y: 	if (only_one):	one_select_unit = true
+	if x and y: 	
+		if (only_one):
+			one_select_unit = true
 		select = true
 		if not(self in unit_manager.unit_select_group): 
 			if one_select_unit : 
@@ -107,6 +112,13 @@ func selecting(s, l):
 		unit_manager.unit_select_group.erase(self)
 	set_modulate(current_color_unit)
 
+func select():
+	select = true
+	current_color_unit = select_color_unit
+	unit_manager.unit_select_group.append(self) 
+	set_modulate(current_color_unit)
+	update()
+	
 func unselect():
 	current_color_unit = diffuse_color_unit
 	set_modulate(current_color_unit)

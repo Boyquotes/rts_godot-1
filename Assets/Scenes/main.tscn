@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=1]
+[gd_scene load_steps=17 format=1]
 
 [ext_resource path="res://Assets/Scripts/players.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Scripts/control.gd" type="Script" id=2]
@@ -13,7 +13,8 @@
 [ext_resource path="res://Assets/Themes/in_game.tres" type="Theme" id=11]
 [ext_resource path="res://Assets/Textures/Control/box.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Textures/Control/fillbox.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Scripts/minimap.gd" type="Script" id=14]
+[ext_resource path="res://Assets/Scripts/tagPanel.gd" type="Script" id=14]
+[ext_resource path="res://Assets/Scripts/minimap.gd" type="Script" id=15]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -109,8 +110,10 @@ custom_styles/panel = SubResource( 1 )
 anchor/left = 1
 anchor/right = 1
 theme/theme = ExtResource( 7 )
-margin/left = 1024.0
-margin/right = 984.0
+margin/left = 1209.0
+margin/top = -39.0
+margin/right = 1169.0
+margin/bottom = 1.0
 
 [node name="Unknow" parent="CanvasLayer/DevPanel/unit_manager/national_tabs"]
 
@@ -291,7 +294,20 @@ margin/right = 37.0
 margin/bottom = 18.0
 columns = 4
 
-[node name="minimap" type="Control" parent="CanvasLayer"]
+[node name="infoPanel" type="Control" parent="CanvasLayer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+script/script = ExtResource( 14 )
+font_color = Color( 0, 0, 0, 1 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer/infoPanel"]
 
 anchor/right = 1
 anchor/bottom = 1
@@ -299,57 +315,60 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 760.0
-margin/bottom = 560.0
-script/script = ExtResource( 14 )
-
-[node name="WindowDialog" type="WindowDialog" parent="CanvasLayer/minimap"]
-
-editor/display_folded = true
-visibility/visible = false
-anchor/top = 3
-anchor/bottom = 3
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 22.0
-margin/right = 152.0
-margin/bottom = -115.0
-popup/exclusive = false
-window/title = "MAP"
-
-[node name="TextureFrame" type="TextureFrame" parent="CanvasLayer/minimap/WindowDialog"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
 theme/theme = ExtResource( 11 )
-margin/left = 0.0
-margin/top = -2.0
-margin/right = 152.0
-margin/bottom = 135.0
-expand = true
-stretch_mode = 0
+margin/left = 835.0
+margin/top = 0.0
+margin/right = -982.0
+margin/bottom = -726.0
 
-[node name="minimap_refresh" type="Timer" parent="CanvasLayer/minimap"]
+[node name="minimap_refresh" type="Timer" parent="CanvasLayer/infoPanel/Panel"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = true
 
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/infoPanel/Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 24.0
+margin/top = 24.0
+margin/right = 98.0
+margin/bottom = 221.0
+scroll/horizontal = false
+scroll/vertical = true
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/infoPanel/Panel/ScrollContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+columns = 1
+
+[node name="minimap" type="TextureFrame" parent="CanvasLayer/infoPanel/Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 11 )
+margin/left = 17.0
+margin/top = 612.0
+margin/right = 172.0
+margin/bottom = 749.0
+expand = true
+stretch_mode = 0
+script/script = ExtResource( 15 )
+
 [connection signal="pressed" from="CanvasLayer/MapMode/bt_ch_background_map" to="CanvasLayer/MapMode" method="_on_bt_ch_background_map_pressed"]
-
-[connection signal="mouse_enter" from="CanvasLayer/minimap/WindowDialog" to="CanvasLayer/minimap" method="_on_WindowDialog_mouse_enter"]
-
-[connection signal="mouse_exit" from="CanvasLayer/minimap/WindowDialog" to="CanvasLayer/minimap" method="_on_WindowDialog_mouse_exit"]
-
-[connection signal="timeout" from="CanvasLayer/minimap/minimap_refresh" to="CanvasLayer/minimap" method="_on_minimap_refresh_timeout"]
 
 
 [editable path="world"]
