@@ -7,46 +7,58 @@ onready var info_panel = get_node("../CanvasLayer/infoPanel/Panel")
 onready var units_scene = get_node("../world/units")
 export var select_color = Color(0,1,0,0.1)
 export var select_color_border = Color(0,1,0)
-var start_point = Vector2()
-var last_point = Vector2()
-var start_point_loc = Vector2()
-var last_point_loc = Vector2()
-var minimap_move = false
+var start_point = null
+var last_point = null
+var start_point_loc = null
+var last_point_loc = null
+
+onready var sel_ar = get_node("../CanvasLayer/select_area")
+
+func drop_select():
+	start_point = null
+	last_point = null
+	start_point_loc = null
+	last_point_loc = null
+
 
 func controller_select():
 	if Input.is_action_just_pressed("LKM"):
-		for unit in units_scene.unit_select_group:
-			unit.unselect()
-		start_point = cam.get_global_mouse_pos()
-		start_point_loc = get_viewport().get_mouse_pos()
-	if Input.is_action_pressed("LKM"):
-		last_point = cam.get_global_mouse_pos()
-		last_point_loc = get_viewport().get_mouse_pos()
-		draw_select_area()
-	elif Input.is_action_just_released("LKM"):
-		get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
-		start_point = Vector2()
-		last_point = Vector2()
-		start_point_loc = Vector2()
-		last_point_loc = Vector2()
-		draw_select_area()
-
-func _process(delta):
-	if not((Input.is_action_pressed("DT_unit_add") and dev_panel.is_visible())):
-		if area_not_is_info_panel():
-			if area_not_is_target_manager():
-				controller_select()
-			elif not(target_manager.is_visible()):
-				controller_select()
-		else:		
-			start_point = cam.get_global_mouse_pos()
-			start_point_loc = get_viewport().get_mouse_pos()
+		if start_point == null:
+			if area_not_is_info_panel():
+				start_point = cam.get_global_mouse_pos()
+				start_point_loc = get_viewport().get_mouse_pos()
+				last_point = cam.get_global_mouse_pos()
+				last_point_loc = get_viewport().get_mouse_pos()
+				get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
+				draw_select_area()
+			else:
+				drop_select()
+				
+	
+	if Input.is_action_pressed("LKM"):	
+		if start_point == null:
+			if area_not_is_info_panel():
+				start_point = cam.get_global_mouse_pos()
+				start_point_loc = get_viewport().get_mouse_pos()
+			else:
+				drop_select()
+		else:
 			last_point = cam.get_global_mouse_pos()
 			last_point_loc = get_viewport().get_mouse_pos()
 			draw_select_area()
 
+			
+	if Input.is_action_just_released("LKM"):
+		if start_point != null:
+			get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
+		drop_select()
+		sel_ar.hide()
+
+func _process(delta):
+	controller_select()
+	
+
 func draw_select_area():
-	var sel_ar = get_node("../CanvasLayer/select_area")
 	sel_ar.show()
 	if (start_point_loc.x < last_point_loc.x):
 		sel_ar.set_margin(0,start_point_loc.x)
@@ -79,28 +91,7 @@ func area_not_is_info_panel():
 		return false
 
 func _ready():
-	draw_select_area();	set_process(true)
-
-#func controller_select():
-#	if Input.is_action_just_pressed("LKM"):
-#		for unit in units_scene.unit_select_group:	
-#			unit.unselect()
-#		if minimap_move == false:
-#			start_point = cam.get_global_mouse_pos()
-#			start_point_loc = get_viewport().get_mouse_pos()
-#	if Input.is_action_pressed("LKM"):
-#		if minimap_move == false:
-#			last_point = cam.get_global_mouse_pos()
-#			last_point_loc = get_viewport().get_mouse_pos()
-#			draw_select_area()
-#	elif Input.is_action_just_released("LKM"):
-#		if minimap_move == false:
-#			get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
-#		start_point = Vector2()
-#		last_point = Vector2()
-#		start_point_loc = Vector2()
-#		last_point_loc = Vector2()
-#		draw_select_area()
+	set_process(true)
 
 
 
