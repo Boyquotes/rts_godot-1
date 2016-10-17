@@ -29,8 +29,9 @@ func controller_select():
 				start_point_loc = get_viewport().get_mouse_pos()
 				last_point = cam.get_global_mouse_pos()
 				last_point_loc = get_viewport().get_mouse_pos()
-				get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
-				draw_select_area()
+				if area_not_is_target_manager():
+					get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
+					draw_select_area()
 			else:
 				drop_select()
 				
@@ -38,8 +39,7 @@ func controller_select():
 	if Input.is_action_pressed("LKM"):	
 		if start_point == null:
 			if area_not_is_info_panel():
-				start_point = cam.get_global_mouse_pos()
-				start_point_loc = get_viewport().get_mouse_pos()
+				pass
 			else:
 				drop_select()
 		else:
@@ -50,7 +50,8 @@ func controller_select():
 			
 	if Input.is_action_just_released("LKM"):
 		if start_point != null:
-			get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
+			if area_not_is_target_manager():
+				get_tree().call_group(2, "player_army", "selecting", start_point, last_point)
 		drop_select()
 		sel_ar.hide()
 
@@ -74,13 +75,15 @@ func draw_select_area():
 		sel_ar.set_margin(1,last_point_loc.y)
 
 func area_not_is_target_manager():
-	if((target_manager.is_visible()) and
-		((get_viewport().get_mouse_pos().y < target_manager.get_global_pos().y) or 
-		(get_viewport().get_mouse_pos().x > (target_manager.get_global_pos().x + target_manager.get_size().x)))):
-		return true
+	if target_manager.is_visible():
+		if ((get_viewport().get_mouse_pos().y < target_manager.get_global_pos().y) or 
+		(get_viewport().get_mouse_pos().x > (target_manager.get_global_pos().x + target_manager.get_size().x))):
+			return true
+		else:
+			return false
 	else:
-		return false
-
+		return true
+		
 func area_not_is_info_panel():
 	if((info_panel.is_visible()) and 
 		(get_viewport().get_mouse_pos().x < info_panel.get_global_pos().x)):
