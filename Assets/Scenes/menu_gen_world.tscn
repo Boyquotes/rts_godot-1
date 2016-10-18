@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://Assets/Themes/in_game.tres" type="Theme" id=1]
+
+[node name="Panel" type="Panel"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+
+rect/min_size = Vector2( 10, 10 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 232.0
+margin/bottom = 762.0
+custom_constants/margin_top = 30
+custom_constants/margin_left = 30
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 30.0
+margin/top = 30.0
+margin/right = 232.0
+margin/bottom = 762.0
+columns = 5
+
+[node name="Button" type="Button" parent="MarginContainer/GridContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 16.0
+margin/bottom = 30.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+
+[node name="Button 2" type="Button" parent="MarginContainer/GridContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 20.0
+margin/top = 0.0
+margin/right = 36.0
+margin/bottom = 30.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+
+
