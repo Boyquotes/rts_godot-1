@@ -22,7 +22,7 @@ func drop_select():
 
 
 func controller_select():
-	if Input.is_action_just_pressed("LKM"):
+	if Input.is_action_just_pressed("LKM") and not(dev_panel.is_visible() and Input.is_action_pressed("DT_unit_add")):
 		if start_point == null:
 			if area_not_is_info_panel():
 				start_point = cam.get_global_mouse_pos()
